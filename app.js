@@ -99,14 +99,15 @@
     p.isVideo = !!(p.image && /\.(mp4|mov|webm)$/i.test(p.image));
   }
 
-  renderTabs();
-  renderFilters();
-  renderStats();
-  renderAll();
+  // Bind handlers first so a rendering error can never leave the modal un-closable.
   bindModal();
   bindView();
   bindBio();
   bindPicker();
+  renderTabs();
+  renderFilters();
+  renderStats();
+  renderAll();
 
   function $(sel) { return document.querySelector(sel); }
   function el(tag, cls, txt) {
@@ -201,7 +202,10 @@
     const g = $('#gridView'); g.innerHTML = '';
     const posts = filteredPosts();
     if (!posts.length) { g.innerHTML = '<div style="grid-column:1/-1; padding:60px; text-align:center; color:var(--ink-mute)">No posts match the current filters.</div>'; return; }
-    posts.forEach(p => g.appendChild(makeTile(p)));
+    posts.forEach(p => {
+      try { g.appendChild(makeTile(p)); }
+      catch (err) { console.error('Failed to render tile for post', p?.id, err); }
+    });
   }
 
   function makeTile(p) {
@@ -248,7 +252,7 @@
     } else if (isCarousel) {
       // Carousel with all slides being placeholders
       const card = el('div', 'prod-card');
-      card.appendChild(el('div', 'prod-type', 'carousel · ' + p.slides.length + ' slides'));
+      card.appendChild(el('div', 'prod-type', 'carousel · ' + (p.slides?.length || 0) + ' slides'));
       card.appendChild(el('div', 'prod-title', p.title));
       card.appendChild(el('div', 'prod-label', 'Add photos'));
       t.appendChild(card);
@@ -258,7 +262,7 @@
     if (p.day) left.appendChild(badge('day', dayLabel(p.day)));
     t.appendChild(left);
     const right = el('div', 'tile-badge-right');
-    if (isCarousel) right.appendChild(badge('carousel-ind', '⊞ ' + p.slides.length));
+    if (isCarousel && p.slides?.length) right.appendChild(badge('carousel-ind', '⊞ ' + p.slides.length));
     right.appendChild(badge('format-' + p.format, fmtShort(p.format)));
     const st = getStatus(p.id);
     if (st !== 'draft') right.appendChild(badge('status-' + st, stShort(st)));
