@@ -2,6 +2,7 @@
   const STATUS_KEY = 'ks-ua-planner-status-v3';
   const OVERRIDE_KEY = 'ks-ua-planner-overrides-v3';
   const CUSTOM_KEY = 'ks-ua-custom-posts-v1';
+  const ORDER_KEY = 'ks-ua-order-v1';
   const FORMATS = [
     { id: 'static',        label: 'Static' },
     { id: 'carousel',      label: 'Carousel' },
@@ -22,6 +23,9 @@
     statuses: loadStatuses(),
     overrides: loadOverrides(),
     customPosts: loadCustom(),
+    order: loadOrder(),
+    dragId: null,
+    justDragged: 0,
     pickerOpen: false,
     pickerCallback: null,
   };
@@ -34,6 +38,40 @@
   // All posts = plan posts (from posts.json) + user-created posts (from LocalStorage)
   function allPosts() { return state.data.posts.concat(state.customPosts); }
   function isCustom(p) { return !!p && p.custom === true; }
+
+  /* ---- Custom ordering (drag to reorder), persisted in LocalStorage ---- */
+  function loadOrder() { try { return JSON.parse(localStorage.getItem(ORDER_KEY) || 'null'); } catch { return null; } }
+  function saveOrder() { try { localStorage.setItem(ORDER_KEY, JSON.stringify(state.order)); } catch {} }
+  // Reconcile saved order with the current set of posts: keep saved sequence,
+  // drop removed ids, append any new posts in their default (order-field) position.
+  function ensureOrder() {
+    const ids = allPosts().slice().sort((a, b) => a.order - b.order).map(p => p.id);
+    const idset = new Set(ids);
+    const base = Array.isArray(state.order) ? state.order.filter(id => idset.has(id)) : [];
+    const have = new Set(base);
+    ids.forEach(id => { if (!have.has(id)) base.push(id); });
+    state.order = base;
+    return base;
+  }
+  function orderIndexMap() {
+    const ord = ensureOrder();
+    const m = {};
+    ord.forEach((id, i) => { m[id] = i; });
+    return m;
+  }
+  function reorderPost(dragId, targetId, before) {
+    if (dragId === targetId) return;
+    const arr = ensureOrder().slice();
+    const from = arr.indexOf(dragId);
+    if (from < 0) return;
+    arr.splice(from, 1);
+    const to = arr.indexOf(targetId);
+    if (to < 0) arr.push(dragId);
+    else arr.splice(before ? to : to + 1, 0, dragId);
+    state.order = arr;
+    saveOrder();
+    renderAll();
+  }
 
   function loadStatuses() { try { return JSON.parse(localStorage.getItem(STATUS_KEY) || '{}'); } catch { return {}; } }
   function saveStatuses() { localStorage.setItem(STATUS_KEY, JSON.stringify(state.statuses)); }
@@ -104,7 +142,7 @@
   state.images.main = await scanDir('images/');
   state.images.productShots = await scanDir('images/product-shots/');
 
-  const r = await fetch('posts.json?v=11');
+  const r = await fetch('posts.json?v=13');
   state.data = await r.json();
   for (const p of state.data.posts) {
     p.isVideo = !!(p.image && /\.(mp4|mov|webm)$/i.test(p.image));
@@ -193,6 +231,7 @@
   function stLabel(s) { return ({ draft: 'Draft', ready: 'Ready', scheduled: 'Scheduled', posted: 'Posted' })[s]; }
 
   function filteredPosts() {
+    const idx = orderIndexMap();
     return allPosts().filter(p => {
       if (state.activeTab !== 'all' && p.phase !== state.activeTab) return false;
       if (state.activeFormats.size && !state.activeFormats.has(p.format)) return false;
@@ -200,7 +239,7 @@
       if (state.activeStatuses.size && !state.activeStatuses.has(getStatus(p.id))) return false;
       if (state.productionOnly && !p.productionRequired) return false;
       return true;
-    }).sort((a, b) => a.order - b.order);
+    }).sort((a, b) => (idx[a.id] ?? 1e9) - (idx[b.id] ?? 1e9));
   }
 
   function renderStats() {
@@ -241,7 +280,7 @@
       + (isProd && !thumb ? ' production' : '')
       + (getStatus(p.id) === 'posted' ? ' posted' : ''));
     t.dataset.id = p.id;
-    t.onclick = () => openModal(p);
+    t.onclick = () => { if (Date.now() - state.justDragged < 250) return; openModal(p); };
 
     if (thumb) {
       const path = mediaPath(thumb);
@@ -300,12 +339,50 @@
       const bot = el('div', 'tile-bottom', p.title);
       t.appendChild(bot);
     }
+    makeDraggable(t, p);
     return t;
   }
   function dayLabel(d) {
     if (!d) return '';
     if (/дроп|drop/i.test(d)) return 'DROP';
     return d;
+  }
+
+  /* ---- drag-to-reorder wiring, shared by tiles (grid) and rows (list) ---- */
+  function clearDropMarks() {
+    document.querySelectorAll('.drop-before,.drop-after').forEach(n => n.classList.remove('drop-before', 'drop-after'));
+  }
+  function dropBefore(e, node) {
+    const r = node.getBoundingClientRect();
+    return state.view === 'list' ? (e.clientY - r.top) < r.height / 2 : (e.clientX - r.left) < r.width / 2;
+  }
+  function makeDraggable(node, p) {
+    node.draggable = true;
+    node.addEventListener('dragstart', e => {
+      state.dragId = p.id; node.classList.add('dragging');
+      if (e.dataTransfer) { e.dataTransfer.effectAllowed = 'move'; try { e.dataTransfer.setData('text/plain', p.id); } catch {} }
+    });
+    node.addEventListener('dragend', () => {
+      node.classList.remove('dragging'); state.dragId = null; state.justDragged = Date.now(); clearDropMarks();
+    });
+    node.addEventListener('dragover', e => {
+      if (!state.dragId || state.dragId === p.id) return;
+      e.preventDefault();
+      if (e.dataTransfer) e.dataTransfer.dropEffect = 'move';
+      const before = dropBefore(e, node);
+      node.classList.toggle('drop-before', before);
+      node.classList.toggle('drop-after', !before);
+    });
+    node.addEventListener('dragleave', () => node.classList.remove('drop-before', 'drop-after'));
+    node.addEventListener('drop', e => {
+      e.preventDefault();
+      const before = dropBefore(e, node);
+      const dragId = state.dragId || (e.dataTransfer && e.dataTransfer.getData('text/plain'));
+      node.classList.remove('drop-before', 'drop-after');
+      if (dragId) reorderPost(dragId, p.id, before);
+    });
+    // prevent inner media from starting its own native image-drag
+    node.querySelectorAll('img,video').forEach(m => { m.draggable = false; });
   }
   function fmtShort(f) { return ({ static: 'STATIC', carousel: 'CAR', reel: 'REEL', 'stories-only': 'STORY' })[f] || f.toUpperCase(); }
   function stShort(s) { return ({ ready: '●', scheduled: '◐', posted: '✓' })[s]; }
@@ -317,7 +394,7 @@
   }
   function makeRow(p) {
     const r = el('div', 'row' + (p.productionRequired ? ' production' : ''));
-    r.onclick = () => openModal(p);
+    r.onclick = () => { if (Date.now() - state.justDragged < 250) return; openModal(p); };
     const thumb = el('div', 'thumb');
     const thumbImg = getThumbnail(p);
     if (thumbImg) {
@@ -351,6 +428,7 @@
     info.appendChild(el('h3', '', p.title));
     info.appendChild(el('div', 'caption-preview', (p.caption || '').replace(/\n/g, ' ')));
     r.appendChild(info);
+    makeDraggable(r, p);
     return r;
   }
 
@@ -461,7 +539,7 @@
         if (confirm('Видалити цей пост?')) {
           state.customPosts = state.customPosts.filter(x => x.id !== p.id);
           if (!state.customPosts.length && state.activeTab === 'custom') state.activeTab = 'all';
-          saveCustom(); closeModal(); renderTabs(); renderAll();
+          saveCustom(); ensureOrder(); saveOrder(); closeModal(); renderTabs(); renderAll();
         }
       }, true);
       del.classList.add('danger');
@@ -585,6 +663,11 @@
     if (prodChip) {
       prodChip.onclick = () => { state.productionOnly = !state.productionOnly; renderFilters(); renderAll(); };
     }
+    const resetBtn = $('#resetOrderBtn');
+    if (resetBtn) resetBtn.onclick = () => {
+      try { localStorage.removeItem(ORDER_KEY); } catch {}
+      state.order = null; ensureOrder(); renderAll();
+    };
   }
 
   /* IMAGE PICKER */
@@ -781,7 +864,7 @@
       } else {
         state.customPosts.push(post);
       }
-      if (saveCustom()) { closeEditor(); renderTabs(); renderAll(); openModal(post); }
+      if (saveCustom()) { ensureOrder(); saveOrder(); closeEditor(); renderTabs(); renderAll(); openModal(post); }
     });
     actions.appendChild(save);
     actions.appendChild(mkBtn('Скасувати', closeEditor, true));
