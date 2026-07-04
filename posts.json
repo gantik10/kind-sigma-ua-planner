@@ -4,669 +4,507 @@
     "handle": "@kindsigma.ua",
     "currency": "UAH",
     "basePrice": 5900,
-    "generatedAt": "2026-05-25",
-    "version": "v3",
-    "voice": "Factual, third-person about the product. No emojis. No exclamation marks. No @ tags (except @ahmad.al.zarouni in founder content). No location/geo references (no Dubai, UAE, Sharjah). No partners or stockists mentioned by name. Ends with: availability line + WWW.KINDSIGMA.COM.",
+    "generatedAt": "2026-07-06",
+    "version": "v4",
+    "voice": "Factual, third-person about the product. No emojis. No exclamation marks. No @ tags. No location/geo references. Ends with: availability line + WWW.KINDSIGMA.COM.",
     "payment": "Накладений платіж · передоплата на картку · оплата через сайт",
-    "cause": "UNITED24 (placeholder — confirm in plan)",
-    "note": "All captions in Ukrainian. Pre-launch = 12 posts published in one day to seed feed before paid ads. Product posts are carousels: slide 1 = lifestyle/editorial existing photo, slides 2-3 = clean product shots you upload to /images/product-shots/. The planner auto-detects new files when you refresh."
+    "schedule": "Дроп 6 липня (3 пости), далі новий пост кожні 2–3 дні до 6 серпня.",
+    "note": "Усі 15 постів побудовані виключно з наявних фото/відео. Кожен слайд заповнено реальним медіа — плейсхолдерів немає."
   },
   "phases": [
-    {"id": "pre-launch", "label": "Pre-launch drop (single day, 12 posts)", "color": "#1a1a1a"},
-    {"id": "week-1", "label": "Week 1 · Awareness + Trust", "color": "#3D3326"},
-    {"id": "week-2", "label": "Week 2 · Education + Trend", "color": "#5E4F3D"},
-    {"id": "week-3", "label": "Week 3 · Founder + Cause", "color": "#7A6952"},
-    {"id": "week-4", "label": "Week 4 · Community + Recap", "color": "#9B8B7A"}
+    {
+      "id": "drop",
+      "label": "Дроп · 6 липня",
+      "color": "#1a1a1a"
+    },
+    {
+      "id": "wave-1",
+      "label": "Липень · 9–24",
+      "color": "#5E4F3D"
+    },
+    {
+      "id": "wave-2",
+      "label": "Кінець липня – серпень",
+      "color": "#9B8B7A"
+    }
   ],
   "pillars": {
-    "brand":      {"label": "Brand", "color": "#1a1a1a"},
-    "product":    {"label": "Product Hero", "color": "#8B7355"},
-    "education":  {"label": "Education", "color": "#5E7C5A"},
-    "ugc":        {"label": "UGC / Soc proof", "color": "#D4A574"},
-    "founder":    {"label": "Founder", "color": "#3D3326"},
-    "cause":      {"label": "Light Initiatives", "color": "#A87C50"},
-    "lifestyle":  {"label": "Lifestyle / Daily Routine", "color": "#9B8B7A"},
-    "character":  {"label": "Character", "color": "#E0AF6F"},
-    "community":  {"label": "Community", "color": "#7A8B9C"},
-    "trust":      {"label": "Trust / Ops", "color": "#5E5E5E"},
-    "trend":      {"label": "Trend", "color": "#C56F87"}
+    "brand": {
+      "label": "Brand",
+      "color": "#1a1a1a"
+    },
+    "product": {
+      "label": "Product Hero",
+      "color": "#8B7355"
+    },
+    "education": {
+      "label": "Education",
+      "color": "#5E7C5A"
+    },
+    "ugc": {
+      "label": "UGC / Соц-доказ",
+      "color": "#D4A574"
+    },
+    "founder": {
+      "label": "Founder",
+      "color": "#3D3326"
+    },
+    "lifestyle": {
+      "label": "Lifestyle",
+      "color": "#9B8B7A"
+    },
+    "character": {
+      "label": "Character",
+      "color": "#E0AF6F"
+    },
+    "community": {
+      "label": "Community",
+      "color": "#7A8B9C"
+    },
+    "trend": {
+      "label": "Trend",
+      "color": "#C56F87"
+    }
   },
   "posts": [
     {
-      "id": "pre-1",
+      "id": "p1",
       "order": 1,
-      "phase": "pre-launch",
-      "day": "Drop · 09:00",
-      "format": "static",
+      "phase": "drop",
+      "day": "Дроп · 6 лип",
+      "format": "carousel",
       "pillar": "brand",
-      "title": "Brand intro — three colors",
-      "image": "genesis-frame-scan.jpg",
+      "title": "GENESIS — The Origin Collection",
       "productionRequired": false,
-      "caption": "Сканований образ оправи GENESIS. Доступно у трьох кольорах: Black, Blue, Red.\n\nItalian Mazzucchelli acetate. CR39 категорії 3 з повним захистом UV400.\n\nKIND SIGMA в Україні. Через Direct.\n\nWWW.KINDSIGMA.COM",
-      "hashtags": ["#kindsigma", "#kindsigmaua", "#theorigincollection", "#genesis", "#italianacetate", "#mazzucchelli", "#sunglasses", "#eyewear"]
+      "caption": "GENESIS — геометрична унісекс-оправа з італійського ацетату Mazzucchelli. Лінзи CR39 категорії 3 з повним захистом UV400. Гравіювання Origin Collection на дужці.\n\nДоступно у кольорах Black, Blue та Red.\n\nЦіна 5900 грн.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
+      "hashtags": [
+        "#kindsigma",
+        "#kindsigmaua",
+        "#genesis",
+        "#genesisred",
+        "#theorigincollection",
+        "#italianacetate",
+        "#mazzucchelli",
+        "#sunglasses",
+        "#eyewear",
+        "#uv400"
+      ],
+      "slides": [
+        {
+          "image": "genesis-frame-scan.jpg",
+          "label": "Слайд 1 · дужка з гравіюванням"
+        },
+        {
+          "image": "genesis-red-text.jpg",
+          "label": "Слайд 2 · GENESIS RED"
+        }
+      ]
     },
     {
-      "id": "pre-2",
+      "id": "p2",
       "order": 2,
-      "phase": "pre-launch",
-      "day": "Drop · 09:30",
+      "phase": "drop",
+      "day": "Дроп · 6 лип",
       "format": "carousel",
       "pillar": "product",
-      "title": "GENESIS RED — carousel",
-      "slides": [
-        {"image": "genesis-red-text.jpg", "label": "Slide 1 · existing hero shot"},
-        {"image": null, "isProductShotSlot": true, "suggestedFile": "genesis-red-1.jpg", "label": "Slide 2 · clean product shot", "note": "Drop your GENESIS RED product photo into /images/product-shots/genesis-red-1.jpg"},
-        {"image": null, "isProductShotSlot": true, "suggestedFile": "genesis-red-2.jpg", "label": "Slide 3 · detail (engraving on temple)", "note": "Drop a close-up of the GENESIS RED Origin Collection symbol on the temple into /images/product-shots/genesis-red-2.jpg"}
-      ],
+      "title": "HALIA — quiet confidence",
       "productionRequired": false,
-      "caption": "GENESIS RED — глянцевий бордовий italian Mazzucchelli acetate. Темно-сірі лінзи CR39 категорії 3 з UV400. Геометрія 52мм. Гравіювання Origin Collection symbol на дужці.\n\nТакож доступно у Black і Blue.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
-      "hashtags": ["#kindsigma", "#kindsigmaua", "#genesisred", "#genesis", "#italianacetate", "#mazzucchelli", "#statementframe"]
+      "caption": "HALIA — унісекс-оправа, що втілює спокійну впевненість та позачасову елегантність. Глянцевий чорний італійський ацетат Mazzucchelli, лінзи CR39 категорії 3, UV400.\n\nЦіна 5900 грн.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
+      "hashtags": [
+        "#kindsigma",
+        "#kindsigmaua",
+        "#halia",
+        "#theorigincollection",
+        "#italianacetate",
+        "#mazzucchelli",
+        "#sunglasses",
+        "#eyewear",
+        "#timelesselegance"
+      ],
+      "slides": [
+        {
+          "image": "halia-jane.jpg",
+          "label": "Слайд 1 · hero"
+        },
+        {
+          "image": "halia-evge-1.jpg",
+          "label": "Слайд 2 · editorial"
+        },
+        {
+          "image": "halia-evge-2.jpg",
+          "label": "Слайд 3 · editorial"
+        }
+      ]
     },
     {
-      "id": "pre-3",
+      "id": "p3",
       "order": 3,
-      "phase": "pre-launch",
-      "day": "Drop · 10:00",
-      "format": "carousel",
-      "pillar": "product",
-      "title": "HALIA HAVANA — carousel",
-      "slides": [
-        {"image": "halia-havana-hotel.jpg", "label": "Slide 1 · lifestyle existing"},
-        {"image": null, "isProductShotSlot": true, "suggestedFile": "halia-havana-1.jpg", "label": "Slide 2 · clean product shot"},
-        {"image": null, "isProductShotSlot": true, "suggestedFile": "halia-havana-2.jpg", "label": "Slide 3 · tortoise pattern close-up"}
-      ],
-      "productionRequired": false,
-      "caption": "HALIA HAVANA — italian tortoise acetate з вогняними деталями всередині візерунка. Круглий силует 54мм. Темно-коричневі лінзи CR39 категорії 3 з UV400. Гравійований Origin Collection symbol на дужці.\n\nТакож доступно у Black.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
-      "hashtags": ["#kindsigma", "#kindsigmaua", "#haliahavana", "#halia", "#tortoise", "#quietluxury", "#italianacetate"]
-    },
-    {
-      "id": "pre-4",
-      "order": 4,
-      "phase": "pre-launch",
-      "day": "Drop · 10:30",
-      "format": "carousel",
-      "pillar": "lifestyle",
-      "title": "THE DAILY ROUTINE SERIES — breakfast",
-      "slides": [
-        {"image": "daily-routine-espresso-1.jpg", "label": "Slide 1 · espresso + eggs"},
-        {"image": "daily-routine-morning-1.jpg", "label": "Slide 2 · morning routine"}
-      ],
-      "productionRequired": false,
-      "caption": "THE DAILY ROUTINE SERIES · by KIND SIGMA · 2025\n\nЛегкий сніданок в офісі. HALIA HAVANA поруч, як завжди.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
-      "hashtags": ["#kindsigma", "#kindsigmaua", "#thedailyroutineseries", "#haliahavana", "#mornings", "#stilllife"]
-    },
-    {
-      "id": "pre-5",
-      "order": 5,
-      "phase": "pre-launch",
-      "day": "Drop · 11:00",
-      "format": "carousel",
-      "pillar": "lifestyle",
-      "title": "THE DAILY ROUTINE SERIES — late mornings",
-      "slides": [
-        {"image": "daily-routine-espresso-2.jpg", "label": "Slide 1 · late breakfast"},
-        {"image": "daily-routine-morning-2.jpg", "label": "Slide 2 · morning continued"}
-      ],
-      "productionRequired": false,
-      "caption": "THE DAILY ROUTINE SERIES · by KIND SIGMA · 2025\n\nПісля свят ранки повертаються. З еспресо, яйцем і HALIA HAVANA на столі.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
-      "hashtags": ["#kindsigma", "#kindsigmaua", "#thedailyroutineseries", "#haliahavana", "#mornings"]
-    },
-    {
-      "id": "pre-6",
-      "order": 6,
-      "phase": "pre-launch",
-      "day": "Drop · 11:30",
-      "format": "carousel",
-      "pillar": "product",
-      "title": "HALIA — editorial close-up",
-      "slides": [
-        {"image": "halia-jane.jpg", "label": "Slide 1 · editorial close-up"},
-        {"image": null, "isProductShotSlot": true, "suggestedFile": "halia-black-1.jpg", "label": "Slide 2 · clean product shot"}
-      ],
-      "productionRequired": false,
-      "caption": "HALIA — унісекс-оправа, що ловить тиху упевненість позачасової елегантності.\n\nItalian Mazzucchelli acetate. CR39 категорії 3 з повним UV400.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
-      "hashtags": ["#kindsigma", "#kindsigmaua", "#halia", "#editorial", "#italianacetate", "#unisexeyewear"]
-    },
-    {
-      "id": "pre-7",
-      "order": 7,
-      "phase": "pre-launch",
-      "day": "Drop · 12:00",
-      "format": "carousel",
-      "pillar": "product",
-      "title": "HALIA BLACK — editorial",
-      "slides": [
-        {"image": "halia-evge-1.jpg", "label": "Slide 1 · editorial"},
-        {"image": "halia-evge-2.jpg", "label": "Slide 2 · editorial alternate"},
-        {"image": null, "isProductShotSlot": true, "suggestedFile": "halia-black-2.jpg", "label": "Slide 3 · clean product shot"}
-      ],
-      "productionRequired": false,
-      "caption": "HALIA BLACK.\n\nКруглий унісекс-силует 54мм. Глянцевий чорний italian Mazzucchelli acetate. CR39 категорії 3 з повним UV400.\n\n'Halia' — давнє грецьке 'пам'ять про коханого'. У копії бренду це любовний лист.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
-      "hashtags": ["#kindsigma", "#kindsigmaua", "#haliablack", "#halia", "#editorial"]
-    },
-    {
-      "id": "pre-8",
-      "order": 8,
-      "phase": "pre-launch",
-      "day": "Drop · 12:30",
-      "format": "carousel",
-      "pillar": "character",
-      "title": "Brooklyn in ACACIA YELLOW",
-      "slides": [
-        {"image": "brooklyn-1.jpg", "label": "Slide 1"},
-        {"image": "brooklyn-2.jpg", "label": "Slide 2"},
-        {"image": "brooklyn-3.jpg", "label": "Slide 3"},
-        {"image": "brooklyn-4.jpg", "label": "Slide 4"}
-      ],
-      "productionRequired": false,
-      "caption": "Brooklyn — наша душа офісу. ACACIA YELLOW.\n\nЖовті лінзи CR39 категорії 1. Геометричний силует 56мм. Italian Mazzucchelli acetate.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
-      "hashtags": ["#kindsigma", "#kindsigmaua", "#brooklyn", "#acaciayellow", "#officedog", "#dogsofinstagram"]
-    },
-    {
-      "id": "pre-9",
-      "order": 9,
-      "phase": "pre-launch",
-      "day": "Drop · 13:00",
-      "format": "carousel",
-      "pillar": "character",
-      "title": "Brooklyn — second moment",
-      "slides": [
-        {"image": "brooklyn-charming.jpg", "label": "Slide 1 · Brooklyn in setting"},
-        {"image": null, "isProductShotSlot": true, "suggestedFile": "acacia-yellow-1.jpg", "label": "Slide 2 · ACACIA YELLOW product shot"}
-      ],
-      "productionRequired": false,
-      "caption": "Brooklyn повертається. ACACIA YELLOW.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
-      "hashtags": ["#kindsigma", "#kindsigmaua", "#brooklyn", "#acaciayellow"]
-    },
-    {
-      "id": "pre-10",
-      "order": 10,
-      "phase": "pre-launch",
-      "day": "Drop · 13:30",
-      "format": "static",
-      "pillar": "lifestyle",
-      "title": "ACACIA — streetstyle",
-      "image": "dubai-streetstyle-1.jpg",
-      "productionRequired": false,
-      "caption": "ACACIA у місті.\n\nItalian Mazzucchelli acetate. Геометричний унісекс-силует 56мм. CR39 з UV400.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
-      "hashtags": ["#kindsigma", "#kindsigmaua", "#acacia", "#streetstyle"]
-    },
-    {
-      "id": "pre-11",
-      "order": 11,
-      "phase": "pre-launch",
-      "day": "Drop · 14:00",
+      "phase": "drop",
+      "day": "Дроп · 6 лип",
       "format": "static",
       "pillar": "ugc",
-      "title": "Customer in HALIA BLACK",
-      "image": "halia-black-nastystonem.jpg",
+      "title": "HALIA off-duty",
       "productionRequired": false,
-      "caption": "Клієнтка в HALIA BLACK.\n\nItalian Mazzucchelli acetate. CR39 категорії 3 з UV400.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
-      "hashtags": ["#kindsigma", "#kindsigmaua", "#haliablack", "#halia", "#realclient"]
+      "caption": "HALIA поза кадром. Легка форма, що тримається на обличчі увесь день.\n\nЧорний ацетат Mazzucchelli, UV400.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
+      "hashtags": [
+        "#kindsigma",
+        "#kindsigmaua",
+        "#halia",
+        "#sunglasses",
+        "#everydayeyewear",
+        "#uv400",
+        "#eyewear"
+      ],
+      "image": "halia-black-nastystonem.jpg"
     },
     {
-      "id": "pre-12",
+      "id": "p4",
+      "order": 4,
+      "phase": "wave-1",
+      "day": "9 лип",
+      "format": "static",
+      "pillar": "brand",
+      "title": "HALIA — in-room dining",
+      "productionRequired": false,
+      "caption": "Подається до столу. HALIA — коли аксесуар стає головною стравою.\n\nІталійський ацетат Mazzucchelli, лінзи CR39 категорії 3, UV400.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
+      "hashtags": [
+        "#kindsigma",
+        "#kindsigmaua",
+        "#halia",
+        "#stilllife",
+        "#sunglasses",
+        "#eyewear",
+        "#theorigincollection"
+      ],
+      "image": "halia-havana-hotel.jpg"
+    },
+    {
+      "id": "p5",
+      "order": 5,
+      "phase": "wave-1",
+      "day": "12 лип",
+      "format": "carousel",
+      "pillar": "trend",
+      "title": "Вуличний вихід — серія",
+      "productionRequired": false,
+      "caption": "Коричневий костюм, місто, тонка оправа. Вуличний вихід у чотирьох кадрах.\n\nУнісекс-оправа з італійського ацетату Mazzucchelli, UV400.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
+      "hashtags": [
+        "#kindsigma",
+        "#kindsigmaua",
+        "#streetstyle",
+        "#sunglasses",
+        "#eyewear",
+        "#ootd",
+        "#italianacetate",
+        "#theorigincollection"
+      ],
+      "slides": [
+        {
+          "image": "brooklyn-1.jpg",
+          "label": "Слайд 1"
+        },
+        {
+          "image": "brooklyn-2.jpg",
+          "label": "Слайд 2"
+        },
+        {
+          "image": "brooklyn-3.jpg",
+          "label": "Слайд 3"
+        },
+        {
+          "image": "brooklyn-4.jpg",
+          "label": "Слайд 4 · KIND SIGMA"
+        }
+      ]
+    },
+    {
+      "id": "p6",
+      "order": 6,
+      "phase": "wave-1",
+      "day": "14 лип",
+      "format": "reel",
+      "pillar": "product",
+      "title": "Просто подивіться на них",
+      "productionRequired": false,
+      "caption": "Просто подивіться на них.\n\nThe Origin Collection. Італійський ацетат Mazzucchelli, UV400.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
+      "hashtags": [
+        "#kindsigma",
+        "#kindsigmaua",
+        "#reels",
+        "#sunglasses",
+        "#eyewear",
+        "#theorigincollection",
+        "#mazzucchelli"
+      ],
+      "image": "beauties-video.mp4"
+    },
+    {
+      "id": "p7",
+      "order": 7,
+      "phase": "wave-1",
+      "day": "17 лип",
+      "format": "carousel",
+      "pillar": "lifestyle",
+      "title": "THE DAILY ROUTINE SERIES",
+      "productionRequired": false,
+      "caption": "THE DAILY ROUTINE SERIES. Ідеально зварене еспресо, яйце некруто — і оправа, що завжди поруч.\n\nThe Origin Collection. UV400.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
+      "hashtags": [
+        "#kindsigma",
+        "#kindsigmaua",
+        "#dailyroutine",
+        "#stilllife",
+        "#sunglasses",
+        "#eyewear",
+        "#morningritual",
+        "#theorigincollection"
+      ],
+      "slides": [
+        {
+          "image": "daily-routine-espresso-1.jpg",
+          "label": "Слайд 1 · еспресо"
+        },
+        {
+          "image": "daily-routine-espresso-2.jpg",
+          "label": "Слайд 2 · яйце некруто"
+        },
+        {
+          "image": "daily-routine-morning-1.jpg",
+          "label": "Слайд 3 · ранок"
+        },
+        {
+          "image": "daily-routine-morning-2.jpg",
+          "label": "Слайд 4 · деталі"
+        }
+      ]
+    },
+    {
+      "id": "p8",
+      "order": 8,
+      "phase": "wave-1",
+      "day": "19 лип",
+      "format": "static",
+      "pillar": "character",
+      "title": "Brooklyn — душа офісу",
+      "productionRequired": false,
+      "caption": "Brooklyn — душа офісу. Сьогодні у ролі моделі.\n\nThe Origin Collection. UV400.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
+      "hashtags": [
+        "#kindsigma",
+        "#kindsigmaua",
+        "#dogsofinstagram",
+        "#sunglasses",
+        "#eyewear",
+        "#officedog",
+        "#theorigincollection"
+      ],
+      "image": "brooklyn-charming.jpg"
+    },
+    {
+      "id": "p9",
+      "order": 9,
+      "phase": "wave-1",
+      "day": "22 лип",
+      "format": "carousel",
+      "pillar": "lifestyle",
+      "title": "Золота година",
+      "productionRequired": false,
+      "caption": "Золота година. Літо, вода і темні лінзи.\n\nThe Origin Collection. Лінзи CR39 категорії 3, UV400.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
+      "hashtags": [
+        "#kindsigma",
+        "#kindsigmaua",
+        "#summer",
+        "#goldenhour",
+        "#sunglasses",
+        "#eyewear",
+        "#uv400",
+        "#theorigincollection"
+      ],
+      "slides": [
+        {
+          "image": "coaching-1.jpg",
+          "label": "Слайд 1"
+        },
+        {
+          "image": "coaching-3.jpg",
+          "label": "Слайд 2"
+        },
+        {
+          "image": "coaching-2.jpg",
+          "label": "Слайд 3"
+        }
+      ]
+    },
+    {
+      "id": "p10",
+      "order": 10,
+      "phase": "wave-1",
+      "day": "24 лип",
+      "format": "reel",
+      "pillar": "lifestyle",
+      "title": "Заряджений, як улюблена кава",
+      "productionRequired": false,
+      "caption": "Бадьорий, живий, заряджений — як улюблена кава.\n\nThe Origin Collection. UV400.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
+      "hashtags": [
+        "#kindsigma",
+        "#kindsigmaua",
+        "#reels",
+        "#sunglasses",
+        "#eyewear",
+        "#coffee",
+        "#theorigincollection"
+      ],
+      "image": "bublyk-video.mp4"
+    },
+    {
+      "id": "p11",
+      "order": 11,
+      "phase": "wave-2",
+      "day": "27 лип",
+      "format": "carousel",
+      "pillar": "trend",
+      "title": "Срібло і мереживо",
+      "productionRequired": false,
+      "caption": "Срібло і чорне мереживо. Оправа як завершальний акцент образу.\n\nThe Origin Collection. Італійський ацетат Mazzucchelli, UV400.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
+      "hashtags": [
+        "#kindsigma",
+        "#kindsigmaua",
+        "#styling",
+        "#accessories",
+        "#sunglasses",
+        "#eyewear",
+        "#ootd",
+        "#theorigincollection"
+      ],
+      "slides": [
+        {
+          "image": "fltrd-1.jpg",
+          "label": "Слайд 1"
+        },
+        {
+          "image": "fltrd-2.jpg",
+          "label": "Слайд 2"
+        }
+      ]
+    },
+    {
+      "id": "p12",
       "order": 12,
-      "phase": "pre-launch",
-      "day": "Drop · 14:30 · launch announcement",
+      "phase": "wave-2",
+      "day": "29 лип",
+      "format": "carousel",
+      "pillar": "lifestyle",
+      "title": "Повільний день",
+      "productionRequired": false,
+      "caption": "Повільний день. Кава, світло і бурштинові лінзи.\n\nThe Origin Collection. UV400.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
+      "hashtags": [
+        "#kindsigma",
+        "#kindsigmaua",
+        "#slowliving",
+        "#sunglasses",
+        "#eyewear",
+        "#cafe",
+        "#theorigincollection"
+      ],
+      "slides": [
+        {
+          "image": "dubai-streetstyle-1.jpg",
+          "label": "Слайд 1"
+        },
+        {
+          "image": "dubai-streetstyle-3.jpg",
+          "label": "Слайд 2"
+        }
+      ]
+    },
+    {
+      "id": "p13",
+      "order": 13,
+      "phase": "wave-2",
+      "day": "1 сер",
+      "format": "carousel",
+      "pillar": "community",
+      "title": "На сцені",
+      "productionRequired": false,
+      "caption": "На сцені. Оправа, що тримає темп вечора.\n\nThe Origin Collection. UV400.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
+      "hashtags": [
+        "#kindsigma",
+        "#kindsigmaua",
+        "#onstage",
+        "#live",
+        "#sunglasses",
+        "#eyewear",
+        "#community",
+        "#theorigincollection"
+      ],
+      "slides": [
+        {
+          "image": "xp24-1.jpg",
+          "label": "Слайд 1"
+        },
+        {
+          "image": "xp24-2.jpg",
+          "label": "Слайд 2"
+        },
+        {
+          "image": "xp24-3.jpg",
+          "label": "Слайд 3"
+        }
+      ]
+    },
+    {
+      "id": "p14",
+      "order": 14,
+      "phase": "wave-2",
+      "day": "3 сер",
       "format": "reel",
       "pillar": "brand",
-      "title": "KIND SIGMA — now in Ukraine",
-      "image": "beauties-video.mp4",
+      "title": "За лаштунками офісу",
       "productionRequired": false,
-      "caption": "KIND SIGMA — тепер в Україні.\n\nThe Origin Collection: GENESIS, ACACIA, HALIA. Вісім моделей. Italian Mazzucchelli acetate. CR39 з UV400.\n\nДоступно через Direct по всій Україні. Доставка Новою Поштою. Накладений платіж або передоплата.\n\n10% від кожної пари — на підтримку України через UNITED24.\n\nWWW.KINDSIGMA.COM",
-      "hashtags": ["#kindsigma", "#kindsigmaua", "#theorigincollection", "#genesis", "#acacia", "#halia", "#italianacetate", "#mazzucchelli", "#sunglasses"]
-    },
-
-    {
-      "id": "d1",
-      "order": 13,
-      "phase": "week-1",
-      "day": "1",
-      "format": "carousel",
-      "pillar": "product",
-      "title": "GENESIS BLACK — carousel",
-      "slides": [
-        {"image": null, "isProductShotSlot": true, "suggestedFile": "genesis-black-1.jpg", "label": "Slide 1 · hero product shot"},
-        {"image": null, "isProductShotSlot": true, "suggestedFile": "genesis-black-2.jpg", "label": "Slide 2 · alternate angle"},
-        {"image": null, "isProductShotSlot": true, "suggestedFile": "genesis-black-3.jpg", "label": "Slide 3 · detail"}
+      "caption": "За лаштунками офісу KIND SIGMA. Як народжується щоденна рутина бренду.\n\nThe Origin Collection.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
+      "hashtags": [
+        "#kindsigma",
+        "#kindsigmaua",
+        "#reels",
+        "#bts",
+        "#behindthescenes",
+        "#sunglasses",
+        "#eyewear"
       ],
-      "productionRequired": false,
-      "caption": "GENESIS BLACK.\n\nПерший силует, з якого почалася історія KIND SIGMA. Глянцевий чорний italian Mazzucchelli acetate. Темно-сірі CR39 лінзи з UV400. Геометрія 52мм. Гравіювання Origin Collection symbol на дужці.\n\nТакож доступно у Blue і Red.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
-      "hashtags": ["#kindsigma", "#kindsigmaua", "#genesis", "#genesisblack", "#italianacetate"]
+      "image": "daily-routine-bts-video.mp4"
     },
     {
-      "id": "d2",
-      "order": 14,
-      "phase": "week-1",
-      "day": "2",
-      "format": "carousel",
-      "pillar": "trust",
-      "title": "How to order through Direct",
-      "image": null,
-      "productionRequired": true,
-      "productionType": "diy",
-      "productionBrief": "DIY carousel, 5 slides, ~45 min in Canva or Figma. Off-white background, serif type, black numbering 01-05. One step per slide:\n\n01 · Обери модель\n02 · Напиши в Direct\n03 · Підкажемо форму під обличчя\n04 · Підтвердимо колір та доставку\n05 · Нова Пошта 1-3 дні\n\nFooter on each slide: WWW.KINDSIGMA.COM",
-      "caption": "П'ять кроків до твоєї пари KIND SIGMA в Direct.\n\n01 · Обери модель з каталога.\n02 · Напиши в Direct назву моделі.\n03 · Підкажемо форму під твоє обличчя — за фото.\n04 · Підтвердимо колір та спосіб доставки.\n05 · Нова Пошта 1-3 дні. Київ — день у день.\n\nThe Origin Collection. Вісім моделей. Italian Mazzucchelli acetate.\n\nWWW.KINDSIGMA.COM",
-      "hashtags": ["#kindsigma", "#kindsigmaua", "#howtoorder", "#direct"]
-    },
-    {
-      "id": "d3",
+      "id": "p15",
       "order": 15,
-      "phase": "week-1",
-      "day": "3",
-      "format": "static",
-      "pillar": "lifestyle",
-      "title": "ACACIA — streetstyle moment",
-      "image": "dubai-streetstyle-2.jpg",
-      "productionRequired": false,
-      "caption": "ACACIA.\n\nItalian Mazzucchelli acetate. Геометричний унісекс-силует 56мм.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
-      "hashtags": ["#kindsigma", "#kindsigmaua", "#acacia", "#streetstyle"]
-    },
-    {
-      "id": "d4",
-      "order": 16,
-      "phase": "week-1",
-      "day": "4",
-      "format": "reel",
-      "pillar": "education",
-      "title": "Reel — face shape guide",
-      "image": null,
-      "productionRequired": true,
-      "productionType": "shoot",
-      "productionBrief": "Reel 25-35 sec. Single take or simple cuts. Voice-over (Ukrainian, female 25-35) OR text overlay only.\n\nStructure:\n- Open: silhouette of 4 face shapes (oval, round, square, heart) drawn on off-white\n- For each shape, show 1-2 recommended models close-up\n- End frame: 'Не знаєш свою? Селфі в Direct. WWW.KINDSIGMA.COM'\n\nAmbient soft instrumental matching the brand's quiet register.",
-      "caption": "Чотири типи обличчя — чотири підказки.\n\nОвальне — пасує все. GENESIS виглядає особливо чітко.\nКругле — геометрія. GENESIS у будь-якому кольорі.\nКвадратне — округлий HALIA пом'якшить риси.\nСерцеподібне — cat-eye ACACIA балансує.\n\nНе знаєш свою форму — селфі в Direct. Підкажемо.\n\nWWW.KINDSIGMA.COM",
-      "hashtags": ["#kindsigma", "#kindsigmaua", "#faceshape", "#education"]
-    },
-    {
-      "id": "d5",
-      "order": 17,
-      "phase": "week-1",
-      "day": "5",
+      "phase": "wave-2",
+      "day": "6 сер",
       "format": "carousel",
-      "pillar": "product",
-      "title": "ACACIA GRADIENT PURPLE — carousel",
-      "slides": [
-        {"image": null, "isProductShotSlot": true, "suggestedFile": "acacia-gradient-purple-1.jpg", "label": "Slide 1 · hero product shot"},
-        {"image": null, "isProductShotSlot": true, "suggestedFile": "acacia-gradient-purple-2.jpg", "label": "Slide 2 · gradient lens close-up"},
-        {"image": null, "isProductShotSlot": true, "suggestedFile": "acacia-gradient-purple-3.jpg", "label": "Slide 3 · temple engraving"}
-      ],
-      "productionRequired": false,
-      "caption": "ACACIA GRADIENT PURPLE.\n\nГеометрія з натяком на cat-eye 56мм. Italian Mazzucchelli acetate. Градієнт фіолетової лінзи CR39 категорії 2. Світло-чутливий Origin Collection symbol на дужці.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
-      "hashtags": ["#kindsigma", "#kindsigmaua", "#acacia", "#gradientpurple", "#cateye"]
-    },
-    {
-      "id": "d6",
-      "order": 18,
-      "phase": "week-1",
-      "day": "6",
-      "format": "carousel",
-      "pillar": "trust",
-      "title": "Unboxing — what's in the box",
-      "image": null,
-      "productionRequired": true,
-      "productionType": "shoot",
-      "productionBrief": "Carousel 5 slides. Off-white background, soft daylight. Shoot in 1 session, ~1 hour.\n\nSlide 1: Closed KIND SIGMA branded box (hero shot)\nSlide 2: Box open, sunglasses + pouch + microfiber arranged\nSlide 3: PU leather pouch close-up\nSlide 4: Microfiber cloth + brand card\nSlide 5: Final tableau — full unboxing layflat\n\nMatch the lighting/composition of THE DAILY ROUTINE SERIES.",
-      "caption": "Що всередині пари KIND SIGMA.\n\nФірмова чорна коробка з гравіюванням Origin Collection symbol. Оправа в захисному чохлі. Чохол PU leather. Мікрофібра для лінз. Картка від команди.\n\nThe Origin Collection. Доступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
-      "hashtags": ["#kindsigma", "#kindsigmaua", "#unboxing", "#packaging"]
-    },
-    {
-      "id": "d7",
-      "order": 19,
-      "phase": "week-1",
-      "day": "7",
-      "format": "stories-only",
       "pillar": "community",
-      "title": "Stories-only day",
-      "image": null,
+      "title": "Гарні часи",
       "productionRequired": false,
-      "caption": "Без фідового посту. План сторіс:\n\n1. Реклама закріпленого Highlight 'Каталог'.\n2. Sticker-питання: 'Яка твоя форма обличчя?' (4 опції: овал, круг, квадрат, серце).\n3. Sticker-опитування: 'Який Origin силует ти би взяв(ла) першим?' (3 опції: GENESIS, ACACIA, HALIA).\n4. Повтор launch-Reel з нотаткою 'Якщо пропустив(ла)'.\n5. Q&A блок про матеріал, доставку, обмін, оплату.\n6. Репост 1-2 клієнтських сторіс (якщо є з тегом).\n\nЦей день створює зацікавленість без додавання нового фідового посту — даємо grid 'видихнути'.",
-      "hashtags": []
-    },
-    {
-      "id": "d8",
-      "order": 20,
-      "phase": "week-2",
-      "day": "8",
-      "format": "carousel",
-      "pillar": "product",
-      "title": "ACACIA YELLOW — carousel",
-      "slides": [
-        {"image": null, "isProductShotSlot": true, "suggestedFile": "acacia-yellow-1.jpg", "label": "Slide 1 · hero product shot"},
-        {"image": null, "isProductShotSlot": true, "suggestedFile": "acacia-yellow-2.jpg", "label": "Slide 2 · yellow lens close-up"},
-        {"image": "brooklyn-2.jpg", "label": "Slide 3 · Brooklyn wearing ACACIA YELLOW"}
+      "caption": "Гарні часи. Дякуємо всім, хто був поруч.\n\nThe Origin Collection. UV400.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
+      "hashtags": [
+        "#kindsigma",
+        "#kindsigmaua",
+        "#goodtimes",
+        "#community",
+        "#sunglasses",
+        "#eyewear",
+        "#nightout",
+        "#theorigincollection"
       ],
-      "productionRequired": false,
-      "caption": "ACACIA YELLOW.\n\nЖовта лінза CR39 категорії 1. Чорна геометрична оправа 56мм. Italian Mazzucchelli acetate. Гравіюваний символ Origin на дужці.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
-      "hashtags": ["#kindsigma", "#kindsigmaua", "#acaciayellow", "#acacia", "#y2k"]
-    },
-    {
-      "id": "d9",
-      "order": 21,
-      "phase": "week-2",
-      "day": "9",
-      "format": "carousel",
-      "pillar": "product",
-      "title": "ACACIA CYBER GREEN — carousel",
       "slides": [
-        {"image": null, "isProductShotSlot": true, "suggestedFile": "acacia-cyber-green-1.jpg", "label": "Slide 1 · hero product shot"},
-        {"image": null, "isProductShotSlot": true, "suggestedFile": "acacia-cyber-green-2.jpg", "label": "Slide 2 · green lens close-up"},
-        {"image": null, "isProductShotSlot": true, "suggestedFile": "acacia-cyber-green-3.jpg", "label": "Slide 3 · temple detail"}
-      ],
-      "productionRequired": false,
-      "caption": "ACACIA CYBER GREEN.\n\nТемно-зелена лінза CR39 категорії 3. Чорна оправа 56мм. Italian Mazzucchelli acetate. Гравіювання Origin світло-чутливе — мерехтить під сонцем.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
-      "hashtags": ["#kindsigma", "#kindsigmaua", "#acacia", "#cybergreen"]
-    },
-    {
-      "id": "d10",
-      "order": 22,
-      "phase": "week-2",
-      "day": "10",
-      "format": "carousel",
-      "pillar": "education",
-      "title": "Mazzucchelli vs plastic",
-      "image": null,
-      "productionRequired": true,
-      "productionType": "diy",
-      "productionBrief": "DIY education carousel, 5 slides, ~1 hour in Canva. Off-white background, serif headlines, sans-serif body.\n\nSlide 1: 'Чому Mazzucchelli' (large serif, image: Mazzucchelli factory exterior — free use from Mazzucchelli1849.it press kit)\nSlide 2: 'З 1849 року' + brief history\nSlide 3: 'Той самий ацетат у багатьох люксових брендах'\nSlide 4: 'Plant-based cellulose' (cellulose plant illustration)\nSlide 5: 'Кожна оправа унікальна' (close-up of unique acetate pattern)\n\nFooter: WWW.KINDSIGMA.COM",
-      "caption": "Чому ми всі повторюємо це слово — Mazzucchelli.\n\nMazzucchelli 1849 — італійська фабрика, де роблять ацетат з 1849 року. Той самий матеріал в оправах багатьох європейських люксових брендів.\n\nPlant-based cellulose acetate — з целюлози бавовни та деревини, не нафта. Приємний на дотик, не нагрівається, не деформується.\n\nКожна оправа має унікальний малюнок ацетату — у пари немає двох однакових.\n\nThe Origin Collection. Italian Mazzucchelli acetate. CR39 з UV400. Доступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
-      "hashtags": ["#kindsigma", "#kindsigmaua", "#mazzucchelli", "#italianacetate", "#sustainable", "#handcrafted", "#education"]
-    },
-    {
-      "id": "d11",
-      "order": 23,
-      "phase": "week-2",
-      "day": "11",
-      "format": "static",
-      "pillar": "lifestyle",
-      "title": "ACACIA — evening light",
-      "image": "dubai-streetstyle-3.jpg",
-      "productionRequired": false,
-      "caption": "ACACIA у вечірньому світлі.\n\nItalian Mazzucchelli acetate. CR39 з UV400.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
-      "hashtags": ["#kindsigma", "#kindsigmaua", "#acacia", "#streetstyle"]
-    },
-    {
-      "id": "d12",
-      "order": 24,
-      "phase": "week-2",
-      "day": "12",
-      "format": "carousel",
-      "pillar": "product",
-      "title": "GENESIS BLUE — carousel",
-      "slides": [
-        {"image": null, "isProductShotSlot": true, "suggestedFile": "genesis-blue-1.jpg", "label": "Slide 1 · hero translucent product shot"},
-        {"image": null, "isProductShotSlot": true, "suggestedFile": "genesis-blue-2.jpg", "label": "Slide 2 · translucent close-up"},
-        {"image": "dubai-streetstyle-4.jpg", "label": "Slide 3 · model wearing GENESIS BLUE"}
-      ],
-      "productionRequired": false,
-      "caption": "GENESIS BLUE.\n\nПрозорий блакитний italian Mazzucchelli acetate — як вода. Темно-сірі CR39 лінзи з UV400. Геометрія 52мм.\n\nTranslucent acetate — один з головних eyewear-трендів 2026.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
-      "hashtags": ["#kindsigma", "#kindsigmaua", "#genesisblue", "#translucent", "#eyeweartrend2026"]
-    },
-    {
-      "id": "d13",
-      "order": 25,
-      "phase": "week-2",
-      "day": "13",
-      "format": "static",
-      "pillar": "ugc",
-      "title": "Customer — first feedback",
-      "image": "ugc-vadim-1.jpg",
-      "productionRequired": false,
-      "caption": "Перший відгук з Україні.\n\nHALIA BLACK. Italian Mazzucchelli acetate. CR39 з UV400.\n\nЯкщо ти теж замовила — присилай фото в Direct. З твого дозволу покажемо у нашій спільноті.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
-      "hashtags": ["#kindsigma", "#kindsigmaua", "#realclient", "#haliablack"]
-    },
-    {
-      "id": "d14",
-      "order": 26,
-      "phase": "week-2",
-      "day": "14",
-      "format": "carousel",
-      "pillar": "lifestyle",
-      "title": "THE DAILY ROUTINE SERIES — Ukrainian edition",
-      "image": null,
-      "productionRequired": true,
-      "productionType": "shoot",
-      "productionBrief": "Re-shoot a Daily Routine Series still-life with Ukrainian context — українська кераміка, кава з турки, тост з бринзою. Off-white background, soft daylight.\n\nReference existing daily-routine-espresso-1.jpg for composition and lighting.\n\nSetup needs:\n- Off-white tabletop\n- Ukrainian-context food/drink prop (turka, bryndza, etc.)\n- HALIA HAVANA prop\n- 2-3 different angle shots for carousel\n\n2-3 hours studio + light editing.",
-      "caption": "THE DAILY ROUTINE SERIES · by KIND SIGMA · українська редакція\n\nКава з турки, тост з бринзою, HALIA HAVANA на столі. Ранок, який не вимагає поспіху.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
-      "hashtags": ["#kindsigma", "#kindsigmaua", "#thedailyroutineseries", "#haliahavana", "#mornings"]
-    },
-    {
-      "id": "d15",
-      "order": 27,
-      "phase": "week-3",
-      "day": "15",
-      "format": "reel",
-      "pillar": "founder",
-      "title": "Founder voice-over — Ahmed Al Zarouni",
-      "image": "daily-routine-bts-video.mp4",
-      "productionRequired": true,
-      "productionType": "video-edit",
-      "productionBrief": "Edit Reel 30-45 sec. Use existing daily-routine-bts-video.mp4 (BTS office footage) + add new voice-over from Ahmed Al Zarouni.\n\nVoice-over script (English, ~30 sec):\n'I did not start KIND SIGMA as a business. I started it as a journey — from art and storytelling to an object you can carry on your face every day. The Origin Collection began with a simple idea: that an object can carry meaning.'\n\nAdd Ukrainian subtitles on screen.\nEnd frame: 'Ahmed Al Zarouni · founder · WWW.KINDSIGMA.COM'\n\nIf Ahmed cannot record voice-over: use text-only Reel with the same script as on-screen typography.\n\nThis is the one post where @ahmad.al.zarouni IS tagged.",
-      "caption": "Я не починав KIND SIGMA як бізнес. Я починав його як подорож — від мистецтва і сторителлінгу до речі, яку можна носити щодня.\n\nThe Origin Collection почалася з простої ідеї: предмет може нести сенс.\n\n— @ahmad.al.zarouni, founder KIND SIGMA\n\nДоступно через Direct в Україні.\n\nWWW.KINDSIGMA.COM",
-      "hashtags": ["#kindsigma", "#kindsigmaua", "#founder", "#brandstory", "#theorigincollection"]
-    },
-    {
-      "id": "d16",
-      "order": 28,
-      "phase": "week-3",
-      "day": "16",
-      "format": "carousel",
-      "pillar": "product",
-      "title": "HALIA BLACK — second carousel",
-      "slides": [
-        {"image": null, "isProductShotSlot": true, "suggestedFile": "halia-black-1.jpg", "label": "Slide 1 · hero product shot"},
-        {"image": null, "isProductShotSlot": true, "suggestedFile": "halia-black-3.jpg", "label": "Slide 2 · profile angle"},
-        {"image": "halia-evge-2.jpg", "label": "Slide 3 · editorial on model"}
-      ],
-      "productionRequired": false,
-      "caption": "HALIA BLACK.\n\nКруглий унісекс-силует 54мм. Italian Mazzucchelli acetate з глянцевим чорним фінішем. CR39 категорії 3 з повним UV400. Гравійований Origin Collection symbol на дужці.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
-      "hashtags": ["#kindsigma", "#kindsigmaua", "#haliablack", "#halia"]
-    },
-    {
-      "id": "d17",
-      "order": 29,
-      "phase": "week-3",
-      "day": "17",
-      "format": "carousel",
-      "pillar": "education",
-      "title": "5 models for round face",
-      "image": null,
-      "productionRequired": true,
-      "productionType": "diy",
-      "productionBrief": "DIY education carousel, 6 slides, ~1 hour in Canva.\n\nSlide 1: 'Кругле обличчя — geometric' (illustration of round face silhouette + do/don't symbols)\nSlides 2-6: One recommended model per slide with product image + 1-sentence rationale.\n\nUse product photos from /images/product-shots/ as they get uploaded. If not yet available, use existing assets (genesis-frame-scan.jpg, genesis-red-text.jpg).\n\nOff-white background, no emojis, quiet typography.",
-      "caption": "Кругле обличчя — обирай геометрію.\n\nGENESIS BLACK — мейн вибір, чисті прямі лінії.\nGENESIS BLUE — translucent ефект тонує риси.\nGENESIS RED — додає вертикаль на обличчя.\nACACIA CYBER GREEN — м'якша геометрія з натяком cat-eye.\nACACIA YELLOW — гра кольору відверне увагу від округлості.\n\nЦих п'ять моделей працюють найкраще. Уникай абсолютно круглого HALIA — буде дублювати форму.\n\nНе знаєш свою форму — селфі в Direct.\n\nThe Origin Collection. Italian Mazzucchelli acetate.\n\nWWW.KINDSIGMA.COM",
-      "hashtags": ["#kindsigma", "#kindsigmaua", "#faceshape", "#roundface", "#education"]
-    },
-    {
-      "id": "d18",
-      "order": 30,
-      "phase": "week-3",
-      "day": "18",
-      "format": "carousel",
-      "pillar": "product",
-      "title": "GENESIS RED — second carousel",
-      "slides": [
-        {"image": null, "isProductShotSlot": true, "suggestedFile": "genesis-red-3.jpg", "label": "Slide 1 · alternate hero shot"},
-        {"image": "genesis-red-text.jpg", "label": "Slide 2 · printed reference"},
-        {"image": null, "isProductShotSlot": true, "suggestedFile": "genesis-red-2.jpg", "label": "Slide 3 · detail"}
-      ],
-      "productionRequired": false,
-      "caption": "GENESIS RED.\n\nГлянцевий бордовий italian Mazzucchelli acetate. Темно-сірі лінзи CR39 категорії 3 з UV400. Геометрія 52мм. Гравіювання Origin Collection symbol на дужці.\n\nКолір, який нічого не питає.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
-      "hashtags": ["#kindsigma", "#kindsigmaua", "#genesisred", "#statementframe"]
-    },
-    {
-      "id": "d19",
-      "order": 31,
-      "phase": "week-3",
-      "day": "19",
-      "format": "reel",
-      "pillar": "trust",
-      "title": "BTS — packing for Ukraine",
-      "image": "bublyk-video.mp4",
-      "productionRequired": true,
-      "productionType": "video-edit",
-      "productionBrief": "New BTS Reel 15-25 sec. Tempo/mood reference: existing bublyk-video.mp4.\n\nShots required:\n- Hands placing sunglasses into PU leather pouch\n- Pouch into KIND SIGMA branded box\n- Box into bubble wrap\n- Final package with Nova Poshta sticker visible\n\nSoft ambient instrumental. End frame: 'Київ — день у день. Україна — 1-3 дні. WWW.KINDSIGMA.COM'\n\nIf no new footage possible: keep existing bublyk-video.mp4 + use the caption as-is.",
-      "caption": "Як упаковуємо твою пару KIND SIGMA для України.\n\nОправа в PU leather чохол. Чохол у фірмову коробку. Коробка у захисний міхур. Все у пакет Нової Пошти.\n\nКиїв — день у день. Інші міста — 1-3 дні.\n\nДоступно через Direct.\n\nWWW.KINDSIGMA.COM",
-      "hashtags": ["#kindsigma", "#kindsigmaua", "#bts", "#packaging", "#novaposhta"]
-    },
-    {
-      "id": "d20",
-      "order": 32,
-      "phase": "week-3",
-      "day": "20",
-      "format": "static",
-      "pillar": "cause",
-      "title": "Light Initiatives — Ukraine update",
-      "image": null,
-      "productionRequired": true,
-      "productionType": "diy",
-      "productionBrief": "Production deliverable: 1 static post.\n\nOption A (text-led): Off-white background, serif typography. Headline: 'Light Initiatives · Ukraine'. Body outlines the donation principle. Footer: WWW.KINDSIGMA.COM\n\nOption B (image-led): Photograph a meaningful Ukrainian-context object alongside KIND SIGMA box — Ukrainian wildflowers (волошки) beside the box, or a notebook of a Ukrainian charity. Off-white, warm light.\n\nCharity to mention: UNITED24 (placeholder — replace with final choice).",
-      "caption": "Light Initiatives · Ukraine.\n\n10% від кожної пари KIND SIGMA, проданої в Україні, направляється у UNITED24 — офіційну платформу підтримки України, що дозволяє обирати категорію (оборона, медицина, відновлення, демінування, освіта).\n\nЗа перші три тижні запуску ми зібрали [X] гривень. Звіт публікуємо щомісяця.\n\nДоступно через Direct.\n\nWWW.KINDSIGMA.COM",
-      "hashtags": ["#kindsigma", "#kindsigmaua", "#lightinitiatives", "#united24", "#10percent"]
-    },
-    {
-      "id": "d21",
-      "order": 33,
-      "phase": "week-3",
-      "day": "21",
-      "format": "static",
-      "pillar": "ugc",
-      "title": "Customer — second feedback",
-      "image": "ugc-vadim-2.jpg",
-      "productionRequired": false,
-      "caption": "Клієнтка в GENESIS BLUE.\n\nItalian Mazzucchelli acetate. CR39 з UV400.\n\nЯкщо ти теж замовила — кидай фото в Direct. З твого дозволу покажемо у нашій спільноті.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
-      "hashtags": ["#kindsigma", "#kindsigmaua", "#realclient", "#genesisblue"]
-    },
-    {
-      "id": "d22",
-      "order": 34,
-      "phase": "week-4",
-      "day": "22",
-      "format": "reel",
-      "pillar": "community",
-      "title": "Top 8 — first clients' picks",
-      "image": null,
-      "productionRequired": true,
-      "productionType": "video-edit",
-      "productionBrief": "Reel 20-30 sec. Animated bar chart of first 50+ Ukrainian client orders across 8 SKUs.\n\nOff-white background, serif headline 'Перші 50 клієнток · їх вибір'. Animated bars counting up. Soft ambient instrumental.\n\nEnd frame: 'WWW.KINDSIGMA.COM'\n\nNumbers below are placeholders — update 24 hours before publishing with real data.",
-      "caption": "Перші 50 клієнток KIND SIGMA Україна — їх вибір.\n\nHALIA HAVANA — 14\nACACIA GRADIENT PURPLE — 11\nACACIA YELLOW — 8\nGENESIS BLACK — 7\nHALIA BLACK — 5\nGENESIS BLUE — 3\nACACIA CYBER GREEN — 1\nGENESIS RED — 1\n\nTortoise і gradient — переможці перших тижнів. Якщо думала про HALIA HAVANA — поспіши.\n\nДоступно через Direct.\n\nWWW.KINDSIGMA.COM",
-      "hashtags": ["#kindsigma", "#kindsigmaua", "#top8", "#community"]
-    },
-    {
-      "id": "d23",
-      "order": 35,
-      "phase": "week-4",
-      "day": "23",
-      "format": "carousel",
-      "pillar": "product",
-      "title": "HALIA HAVANA — second carousel",
-      "slides": [
-        {"image": null, "isProductShotSlot": true, "suggestedFile": "halia-havana-3.jpg", "label": "Slide 1 · hero product shot"},
-        {"image": null, "isProductShotSlot": true, "suggestedFile": "halia-havana-1.jpg", "label": "Slide 2 · tortoise close-up"},
-        {"image": "halia-havana-hotel.jpg", "label": "Slide 3 · lifestyle"}
-      ],
-      "productionRequired": false,
-      "caption": "HALIA HAVANA.\n\nItalian tortoise acetate. Круглий силует 54мм. Темно-коричневі лінзи CR39 з UV400.\n\nQuiet luxury без логотипу через все обличчя.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
-      "hashtags": ["#kindsigma", "#kindsigmaua", "#haliahavana", "#tortoise", "#quietluxury"]
-    },
-    {
-      "id": "d24",
-      "order": 36,
-      "phase": "week-4",
-      "day": "24",
-      "format": "carousel",
-      "pillar": "lifestyle",
-      "title": "10 outfit ideas — ACACIA GRADIENT PURPLE",
-      "image": null,
-      "productionRequired": true,
-      "productionType": "shoot",
-      "productionBrief": "DIY style carousel, 10 slides, ~2 hours.\n\nOption A (flatlay): Photograph 10 outfit layflats from above, ACACIA GRADIENT PURPLE included in each. Warm-neutral palette only (beige, milk, latte, sand, black). Off-white background.\n\nOption B (mood boards): Curate 10 outfit references with ACACIA GRADIENT PURPLE composited in. Faster, lower production quality.\n\nRecommend Option A for brand consistency.",
-      "caption": "ACACIA GRADIENT PURPLE — як вписати у гардероб.\n\n01 · Бежеве пальто, чорний low-tech sneakers.\n02 · Білий лляний костюм, золота сережка.\n03 · Чорний slip-dress, леопардова кофта.\n04 · Денім-жакет, біла футболка.\n05 · Шовкова блуза персикова, чорні брюки.\n06 · Total black, ці окуляри як єдина деталь.\n07 · Сукня oversized у клітинку.\n08 · Тренч, кросівки New Balance.\n09 · Літня лляна сорочка, шорти.\n10 · Усе в теплих тонах — beige, milk, latte, sand.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
-      "hashtags": ["#kindsigma", "#kindsigmaua", "#acacia", "#outfitideas", "#styleguide", "#quietluxury"]
-    },
-    {
-      "id": "d25",
-      "order": 37,
-      "phase": "week-4",
-      "day": "25",
-      "format": "static",
-      "pillar": "ugc",
-      "title": "Customer — ACACIA YELLOW",
-      "image": "ugc-vadim-3.jpg",
-      "productionRequired": false,
-      "caption": "Клієнтка в ACACIA YELLOW.\n\nItalian Mazzucchelli acetate. CR39 з UV400.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
-      "hashtags": ["#kindsigma", "#kindsigmaua", "#realclient", "#acaciayellow"]
-    },
-    {
-      "id": "d26",
-      "order": 38,
-      "phase": "week-4",
-      "day": "26",
-      "format": "carousel",
-      "pillar": "education",
-      "title": "Why CR39 lenses",
-      "image": null,
-      "productionRequired": true,
-      "productionType": "diy",
-      "productionBrief": "DIY education carousel, 4-5 slides, ~45 min in Canva.\n\nSlide 1: 'Чому CR39 лінзи' (large serif)\nSlide 2: '100% UV400 захист' (visual: UV protection diagram)\nSlide 3: '50% легші за скло, у 10 разів міцніші' (comparison visual)\nSlide 4: 'Антирефлекс і антицарапин' (close-up of lens)\nSlide 5: 'Категорії 1-3 — від легкого затемнення до яскравого сонця' (3 lens samples)\n\nOff-white, serif typography, no emojis.",
-      "caption": "Чому CR39 лінзи у KIND SIGMA.\n\nCR39 (allyl diglycol carbonate) — оптичний полімер, розроблений у 1940-х і відтоді стандарт у преміальній оптиці.\n\n100% захист UV400 від UV-A і UV-B.\n50% легші за скло. У 10 разів міцніші за стандартний пластик.\nАнтирефлекс і антицарапинне покриття.\nКатегорії 1-3 залежно від моделі: легке затемнення для приміщень, потужне для яскравого сонця.\n\nThe Origin Collection. Italian Mazzucchelli acetate. CR39.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
-      "hashtags": ["#kindsigma", "#kindsigmaua", "#cr39", "#uv400", "#lensquality", "#education"]
-    },
-    {
-      "id": "d27",
-      "order": 39,
-      "phase": "week-4",
-      "day": "27",
-      "format": "carousel",
-      "pillar": "education",
-      "title": "Care guide — acetate",
-      "image": null,
-      "productionRequired": true,
-      "productionType": "diy",
-      "productionBrief": "DIY care guide carousel, 6 slides, ~1 hour in Canva.\n\nSlide 1: 'П'ять правил догляду'\nSlides 2-6: One rule per slide with minimal illustration.\n\nOff-white, serif headlines, sans body. No emojis. Footer: WWW.KINDSIGMA.COM",
-      "caption": "П'ять правил догляду за ацетатною оправою KIND SIGMA.\n\n01 · Чистити тільки мікрофіброю, що входить у комплект.\n02 · Не лишати в авто на сонці. Ацетат витримує, але любить тіні.\n03 · Якщо забруднились — теплою водою з краплею м'якого мила.\n04 · Не класти лінзами донизу на тверду поверхню.\n05 · Раз на рік — підкручення гвинтів. У будь-якій оптиці безкоштовно.\n\nЦі оправи живуть роками. Italian Mazzucchelli — матеріал, який старіє красиво.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
-      "hashtags": ["#kindsigma", "#kindsigmaua", "#careguide", "#acetate"]
-    },
-    {
-      "id": "d28",
-      "order": 40,
-      "phase": "week-4",
-      "day": "28",
-      "format": "static",
-      "pillar": "ugc",
-      "title": "Customer — HALIA HAVANA",
-      "image": "coaching-1.jpg",
-      "productionRequired": false,
-      "caption": "Клієнтка в HALIA HAVANA.\n\nItalian tortoise acetate. CR39 категорії 3 з UV400.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
-      "hashtags": ["#kindsigma", "#kindsigmaua", "#realclient", "#haliahavana"]
-    },
-    {
-      "id": "d29",
-      "order": 41,
-      "phase": "week-4",
-      "day": "29",
-      "format": "static",
-      "pillar": "lifestyle",
-      "title": "HALIA — third lifestyle moment",
-      "image": "coaching-2.jpg",
-      "productionRequired": false,
-      "caption": "HALIA.\n\nItalian Mazzucchelli acetate. Круглий унісекс-силует 54мм. CR39 з UV400.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
-      "hashtags": ["#kindsigma", "#kindsigmaua", "#halia", "#lifestyle"]
-    },
-    {
-      "id": "d30",
-      "order": 42,
-      "phase": "week-4",
-      "day": "30",
-      "format": "reel",
-      "pillar": "community",
-      "title": "Month recap Reel",
-      "image": null,
-      "productionRequired": true,
-      "productionType": "video-edit",
-      "productionBrief": "Reel 25-40 sec. Compilation of best moments from Month 1: launch announcement, UGC clients, BTS packing, Brooklyn appearances, daily routine still lifes.\n\nSoft ambient instrumental (no playful trending audio — keep the brand register).\n\nText overlay:\n- 'Місяць у Україні'\n- '[X] нових підписниць'\n- '[Y] перших замовлень'\n- '[Z] коробок KIND SIGMA в Україні'\n- '[W] фото від реальних клієнток'\n- '[Σ] гривень у Light Initiatives'\n- 'Дякуємо'\n- 'WWW.KINDSIGMA.COM'\n\nNumbers placeholder — update 24h before publishing.",
-      "caption": "Місяць у Україні.\n\n[X] нових підписниць.\n[Y] перших замовлень.\n[Z] коробок KIND SIGMA вже у вас.\n[W] фото від реальних клієнток.\n[Σ] гривень у Light Initiatives через UNITED24.\n\nДякуємо, що ви тут.\n\nДоступно через Direct.\n\nWWW.KINDSIGMA.COM",
-      "hashtags": ["#kindsigma", "#kindsigmaua", "#monthrecap", "#community"]
+        {
+          "image": "ugc-vadim-1.jpg",
+          "label": "Слайд 1"
+        },
+        {
+          "image": "ugc-vadim-3.jpg",
+          "label": "Слайд 2"
+        },
+        {
+          "image": "ugc-vadim-2.jpg",
+          "label": "Слайд 3"
+        }
+      ]
     }
   ]
 }

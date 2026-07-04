@@ -93,7 +93,7 @@
   state.images.main = await scanDir('images/');
   state.images.productShots = await scanDir('images/product-shots/');
 
-  const r = await fetch('posts.json');
+  const r = await fetch('posts.json?v=6');
   state.data = await r.json();
   for (const p of state.data.posts) {
     p.isVideo = !!(p.image && /\.(mp4|mov|webm)$/i.test(p.image));
@@ -275,8 +275,8 @@
   }
   function dayLabel(d) {
     if (!d) return '';
-    if (d.startsWith('Drop')) return 'DROP';
-    return 'D' + d;
+    if (/дроп|drop/i.test(d)) return 'DROP';
+    return d;
   }
   function fmtShort(f) { return ({ static: 'STATIC', carousel: 'CAR', reel: 'REEL', 'stories-only': 'STORY' })[f] || f.toUpperCase(); }
   function stShort(s) { return ({ ready: '●', scheduled: '◐', posted: '✓' })[s]; }
