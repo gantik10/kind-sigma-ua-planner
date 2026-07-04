@@ -5,14 +5,14 @@
     "currency": "UAH",
     "basePrice": 5900,
     "generatedAt": "2026-07-06",
-    "version": "v7",
-    "voice": "Minimal / editorial Ukrainian. Short, mood-first. No spec dumps, no repeated availability boilerplate. Ends only with kindsigma.com.",
-    "note": "25 постів з наявних фото/відео. HALIA-серія розбита на окремі пости; halia-black прибрано. Мінімалістичні підписи."
+    "version": "v8",
+    "voice": "Minimal / editorial Ukrainian. Short, mood-first. Ends only with kindsigma.com.",
+    "note": "23 пости. Дроп — сітка 3×3 у теплій нейтральній гамі (крем/коричневий/чорний). Синя яхта, ч/б сцена, срібло та вечірки винесені у ролаут для контрасту. Ч/б виступ обʼєднано в одну карусель."
   },
   "phases": [
     {
       "id": "drop",
-      "label": "Дроп · 6 липня",
+      "label": "Дроп · 6 липня (сітка 3×3)",
       "color": "#1a1a1a"
     },
     {
@@ -23,11 +23,6 @@
     {
       "id": "wave-2",
       "label": "Серпень",
-      "color": "#7A6952"
-    },
-    {
-      "id": "wave-3",
-      "label": "Вересень",
       "color": "#9B8B7A"
     }
   ],
@@ -93,6 +88,25 @@
       "day": "Дроп · 6 лип",
       "format": "static",
       "pillar": "product",
+      "title": "HALIA",
+      "productionRequired": false,
+      "caption": "HALIA.\nТиха впевненість, яку не треба пояснювати.\n\nkindsigma.com",
+      "hashtags": [
+        "#kindsigma",
+        "#kindsigmaua",
+        "#halia",
+        "#theorigincollection",
+        "#sunglasses"
+      ],
+      "image": "halia-jane.jpg"
+    },
+    {
+      "id": "p3",
+      "order": 3,
+      "phase": "drop",
+      "day": "Дроп · 6 лип",
+      "format": "static",
+      "pillar": "product",
       "title": "HALIA — in-room dining",
       "productionRequired": false,
       "caption": "Подається до столу.\nHALIA як головна страва.\n\nkindsigma.com",
@@ -105,10 +119,10 @@
       "image": "halia-havana-hotel.jpg"
     },
     {
-      "id": "p3",
-      "order": 3,
-      "phase": "wave-1",
-      "day": "9 лип",
+      "id": "p4",
+      "order": 4,
+      "phase": "drop",
+      "day": "Дроп · 6 лип",
       "format": "static",
       "pillar": "product",
       "title": "HALIA — editorial",
@@ -118,71 +132,15 @@
         "#kindsigma",
         "#kindsigmaua",
         "#halia",
-        "#editorial",
-        "#sunglasses"
+        "#editorial"
       ],
       "image": "halia-evge-1.jpg"
     },
     {
-      "id": "p4",
-      "order": 4,
-      "phase": "wave-1",
-      "day": "12 лип",
-      "format": "static",
-      "pillar": "trend",
-      "title": "Вулиця · I",
-      "productionRequired": false,
-      "caption": "Місто прокидається. Тонка оправа вже на місці.\n\nkindsigma.com",
-      "hashtags": [
-        "#kindsigma",
-        "#kindsigmaua",
-        "#streetstyle",
-        "#ootd"
-      ],
-      "image": "brooklyn-1.jpg"
-    },
-    {
       "id": "p5",
       "order": 5,
-      "phase": "wave-1",
-      "day": "14 лип",
-      "format": "reel",
-      "pillar": "product",
-      "title": "Reel",
-      "productionRequired": false,
-      "caption": "Просто подивіться на них.\n\nkindsigma.com",
-      "hashtags": [
-        "#kindsigma",
-        "#kindsigmaua",
-        "#reels",
-        "#sunglasses",
-        "#theorigincollection"
-      ],
-      "image": "beauties-video.mp4"
-    },
-    {
-      "id": "p6",
-      "order": 6,
-      "phase": "wave-1",
-      "day": "17 лип",
-      "format": "static",
-      "pillar": "lifestyle",
-      "title": "Золота година · I",
-      "productionRequired": false,
-      "caption": "Літо на воді, темні лінзи проти сонця.\n\nkindsigma.com",
-      "hashtags": [
-        "#kindsigma",
-        "#kindsigmaua",
-        "#summer",
-        "#goldenhour"
-      ],
-      "image": "coaching-1.jpg"
-    },
-    {
-      "id": "p7",
-      "order": 7,
-      "phase": "wave-1",
-      "day": "19 лип",
+      "phase": "drop",
+      "day": "Дроп · 6 лип",
       "format": "carousel",
       "pillar": "lifestyle",
       "title": "THE DAILY ROUTINE SERIES",
@@ -214,164 +172,28 @@
       ]
     },
     {
-      "id": "p8",
-      "order": 8,
-      "phase": "wave-1",
-      "day": "22 лип",
-      "format": "static",
-      "pillar": "community",
-      "title": "Сцена · I",
-      "productionRequired": false,
-      "caption": "Світло гасне. Оправа лишається.\n\nkindsigma.com",
-      "hashtags": [
-        "#kindsigma",
-        "#kindsigmaua",
-        "#onstage",
-        "#live"
-      ],
-      "image": "xp24-1.jpg"
-    },
-    {
-      "id": "p9",
-      "order": 9,
-      "phase": "wave-1",
-      "day": "24 лип",
+      "id": "p6",
+      "order": 6,
+      "phase": "drop",
+      "day": "Дроп · 6 лип",
       "format": "static",
       "pillar": "trend",
-      "title": "Вулиця · II",
+      "title": "Вулиця",
       "productionRequired": false,
-      "caption": "Спокій і структура. Другий кадр.\n\nkindsigma.com",
+      "caption": "Місто прокидається. Тонка оправа вже на місці.\n\nkindsigma.com",
       "hashtags": [
         "#kindsigma",
         "#kindsigmaua",
         "#streetstyle",
         "#ootd"
       ],
-      "image": "brooklyn-2.jpg"
+      "image": "brooklyn-1.jpg"
     },
     {
-      "id": "p10",
-      "order": 10,
-      "phase": "wave-1",
-      "day": "27 лип",
-      "format": "static",
-      "pillar": "community",
-      "title": "Вечір · I",
-      "productionRequired": false,
-      "caption": "Вечір тільки починається.\n\nkindsigma.com",
-      "hashtags": [
-        "#kindsigma",
-        "#kindsigmaua",
-        "#nightout",
-        "#goodtimes"
-      ],
-      "image": "ugc-vadim-1.jpg"
-    },
-    {
-      "id": "p11",
-      "order": 11,
-      "phase": "wave-1",
-      "day": "29 лип",
-      "format": "static",
-      "pillar": "product",
-      "title": "HALIA",
-      "productionRequired": false,
-      "caption": "HALIA.\nТиха впевненість, яку не треба пояснювати.\n\nkindsigma.com",
-      "hashtags": [
-        "#kindsigma",
-        "#kindsigmaua",
-        "#halia",
-        "#theorigincollection",
-        "#sunglasses"
-      ],
-      "image": "halia-jane.jpg"
-    },
-    {
-      "id": "p12",
-      "order": 12,
-      "phase": "wave-2",
-      "day": "1 сер",
-      "format": "carousel",
-      "pillar": "trend",
-      "title": "Срібло",
-      "productionRequired": false,
-      "caption": "Срібло і чорне мереживо.\nОправа як фінальний штрих.\n\nkindsigma.com",
-      "hashtags": [
-        "#kindsigma",
-        "#kindsigmaua",
-        "#styling",
-        "#accessories"
-      ],
-      "slides": [
-        {
-          "image": "fltrd-1.jpg",
-          "label": "Кадр 1"
-        },
-        {
-          "image": "fltrd-2.jpg",
-          "label": "Кадр 2"
-        }
-      ]
-    },
-    {
-      "id": "p13",
-      "order": 13,
-      "phase": "wave-2",
-      "day": "3 сер",
-      "format": "static",
-      "pillar": "trend",
-      "title": "Вулиця · III",
-      "productionRequired": false,
-      "caption": "Oversize і впевнений крок.\n\nkindsigma.com",
-      "hashtags": [
-        "#kindsigma",
-        "#kindsigmaua",
-        "#streetstyle",
-        "#ootd"
-      ],
-      "image": "brooklyn-3.jpg"
-    },
-    {
-      "id": "p14",
-      "order": 14,
-      "phase": "wave-2",
-      "day": "6 сер",
-      "format": "reel",
-      "pillar": "lifestyle",
-      "title": "Reel",
-      "productionRequired": false,
-      "caption": "Бадьоро, як улюблена кава.\n\nkindsigma.com",
-      "hashtags": [
-        "#kindsigma",
-        "#kindsigmaua",
-        "#reels",
-        "#coffee"
-      ],
-      "image": "bublyk-video.mp4"
-    },
-    {
-      "id": "p15",
-      "order": 15,
-      "phase": "wave-2",
-      "day": "8 сер",
-      "format": "static",
-      "pillar": "lifestyle",
-      "title": "Золота година · II",
-      "productionRequired": false,
-      "caption": "Сонце на шкірі, музика поруч.\n\nkindsigma.com",
-      "hashtags": [
-        "#kindsigma",
-        "#kindsigmaua",
-        "#summer",
-        "#goldenhour"
-      ],
-      "image": "coaching-2.jpg"
-    },
-    {
-      "id": "p16",
-      "order": 16,
-      "phase": "wave-2",
-      "day": "11 сер",
+      "id": "p7",
+      "order": 7,
+      "phase": "drop",
+      "day": "Дроп · 6 лип",
       "format": "carousel",
       "pillar": "lifestyle",
       "title": "Повільний день",
@@ -395,28 +217,28 @@
       ]
     },
     {
-      "id": "p17",
-      "order": 17,
-      "phase": "wave-2",
-      "day": "13 сер",
+      "id": "p8",
+      "order": 8,
+      "phase": "drop",
+      "day": "Дроп · 6 лип",
       "format": "static",
-      "pillar": "community",
-      "title": "Сцена · II",
+      "pillar": "character",
+      "title": "Brooklyn",
       "productionRequired": false,
-      "caption": "Руки вгору. Темп вечора.\n\nkindsigma.com",
+      "caption": "Brooklyn. Душа офісу — сьогодні в кадрі.\n\nkindsigma.com",
       "hashtags": [
         "#kindsigma",
         "#kindsigmaua",
-        "#onstage",
-        "#live"
+        "#dogsofinstagram",
+        "#officedog"
       ],
-      "image": "xp24-2.jpg"
+      "image": "brooklyn-charming.jpg"
     },
     {
-      "id": "p18",
-      "order": 18,
-      "phase": "wave-2",
-      "day": "16 сер",
+      "id": "p9",
+      "order": 9,
+      "phase": "drop",
+      "day": "Дроп · 6 лип",
       "format": "static",
       "pillar": "product",
       "title": "HALIA — editorial",
@@ -431,10 +253,194 @@
       "image": "halia-evge-2.jpg"
     },
     {
+      "id": "p10",
+      "order": 10,
+      "phase": "wave-1",
+      "day": "9 лип",
+      "format": "reel",
+      "pillar": "product",
+      "title": "Reel",
+      "productionRequired": false,
+      "caption": "Просто подивіться на них.\n\nkindsigma.com",
+      "hashtags": [
+        "#kindsigma",
+        "#kindsigmaua",
+        "#reels",
+        "#sunglasses"
+      ],
+      "image": "beauties-video.mp4"
+    },
+    {
+      "id": "p11",
+      "order": 11,
+      "phase": "wave-1",
+      "day": "12 лип",
+      "format": "static",
+      "pillar": "lifestyle",
+      "title": "Золота година · I",
+      "productionRequired": false,
+      "caption": "Літо на воді, темні лінзи проти сонця.\n\nkindsigma.com",
+      "hashtags": [
+        "#kindsigma",
+        "#kindsigmaua",
+        "#summer",
+        "#goldenhour"
+      ],
+      "image": "coaching-1.jpg"
+    },
+    {
+      "id": "p12",
+      "order": 12,
+      "phase": "wave-1",
+      "day": "14 лип",
+      "format": "static",
+      "pillar": "trend",
+      "title": "Вулиця · II",
+      "productionRequired": false,
+      "caption": "Спокій і структура.\n\nkindsigma.com",
+      "hashtags": [
+        "#kindsigma",
+        "#kindsigmaua",
+        "#streetstyle",
+        "#ootd"
+      ],
+      "image": "brooklyn-2.jpg"
+    },
+    {
+      "id": "p13",
+      "order": 13,
+      "phase": "wave-1",
+      "day": "17 лип",
+      "format": "carousel",
+      "pillar": "community",
+      "title": "На сцені",
+      "productionRequired": false,
+      "caption": "На сцені.\nСвітло гасне — оправа лишається.\n\nkindsigma.com",
+      "hashtags": [
+        "#kindsigma",
+        "#kindsigmaua",
+        "#onstage",
+        "#live"
+      ],
+      "slides": [
+        {
+          "image": "xp24-1.jpg",
+          "label": "Кадр 1"
+        },
+        {
+          "image": "xp24-2.jpg",
+          "label": "Кадр 2"
+        },
+        {
+          "image": "xp24-3.jpg",
+          "label": "Кадр 3"
+        }
+      ]
+    },
+    {
+      "id": "p14",
+      "order": 14,
+      "phase": "wave-1",
+      "day": "19 лип",
+      "format": "static",
+      "pillar": "community",
+      "title": "Вечір · I",
+      "productionRequired": false,
+      "caption": "Вечір тільки починається.\n\nkindsigma.com",
+      "hashtags": [
+        "#kindsigma",
+        "#kindsigmaua",
+        "#nightout",
+        "#goodtimes"
+      ],
+      "image": "ugc-vadim-1.jpg"
+    },
+    {
+      "id": "p15",
+      "order": 15,
+      "phase": "wave-1",
+      "day": "22 лип",
+      "format": "carousel",
+      "pillar": "trend",
+      "title": "Срібло",
+      "productionRequired": false,
+      "caption": "Срібло і чорне мереживо.\nОправа як фінальний штрих.\n\nkindsigma.com",
+      "hashtags": [
+        "#kindsigma",
+        "#kindsigmaua",
+        "#styling",
+        "#accessories"
+      ],
+      "slides": [
+        {
+          "image": "fltrd-1.jpg",
+          "label": "Кадр 1"
+        },
+        {
+          "image": "fltrd-2.jpg",
+          "label": "Кадр 2"
+        }
+      ]
+    },
+    {
+      "id": "p16",
+      "order": 16,
+      "phase": "wave-1",
+      "day": "24 лип",
+      "format": "static",
+      "pillar": "trend",
+      "title": "Вулиця · III",
+      "productionRequired": false,
+      "caption": "Oversize і впевнений крок.\n\nkindsigma.com",
+      "hashtags": [
+        "#kindsigma",
+        "#kindsigmaua",
+        "#streetstyle",
+        "#ootd"
+      ],
+      "image": "brooklyn-3.jpg"
+    },
+    {
+      "id": "p17",
+      "order": 17,
+      "phase": "wave-1",
+      "day": "27 лип",
+      "format": "static",
+      "pillar": "lifestyle",
+      "title": "Золота година · II",
+      "productionRequired": false,
+      "caption": "Сонце на шкірі, музика поруч.\n\nkindsigma.com",
+      "hashtags": [
+        "#kindsigma",
+        "#kindsigmaua",
+        "#summer",
+        "#goldenhour"
+      ],
+      "image": "coaching-2.jpg"
+    },
+    {
+      "id": "p18",
+      "order": 18,
+      "phase": "wave-1",
+      "day": "29 лип",
+      "format": "reel",
+      "pillar": "lifestyle",
+      "title": "Reel",
+      "productionRequired": false,
+      "caption": "Бадьоро, як улюблена кава.\n\nkindsigma.com",
+      "hashtags": [
+        "#kindsigma",
+        "#kindsigmaua",
+        "#reels",
+        "#coffee"
+      ],
+      "image": "bublyk-video.mp4"
+    },
+    {
       "id": "p19",
       "order": 19,
       "phase": "wave-2",
-      "day": "18 сер",
+      "day": "1 сер",
       "format": "static",
       "pillar": "community",
       "title": "Вечір · II",
@@ -452,25 +458,7 @@
       "id": "p20",
       "order": 20,
       "phase": "wave-2",
-      "day": "21 сер",
-      "format": "static",
-      "pillar": "character",
-      "title": "Brooklyn",
-      "productionRequired": false,
-      "caption": "Brooklyn. Душа офісу — сьогодні в кадрі.\n\nkindsigma.com",
-      "hashtags": [
-        "#kindsigma",
-        "#kindsigmaua",
-        "#dogsofinstagram",
-        "#officedog"
-      ],
-      "image": "brooklyn-charming.jpg"
-    },
-    {
-      "id": "p21",
-      "order": 21,
-      "phase": "wave-2",
-      "day": "23 сер",
+      "day": "3 сер",
       "format": "static",
       "pillar": "trend",
       "title": "Вулиця · IV",
@@ -485,10 +473,10 @@
       "image": "brooklyn-4.jpg"
     },
     {
-      "id": "p22",
-      "order": 22,
+      "id": "p21",
+      "order": 21,
       "phase": "wave-2",
-      "day": "26 сер",
+      "day": "6 сер",
       "format": "static",
       "pillar": "lifestyle",
       "title": "Золота година · III",
@@ -503,10 +491,10 @@
       "image": "coaching-3.jpg"
     },
     {
-      "id": "p23",
-      "order": 23,
+      "id": "p22",
+      "order": 22,
       "phase": "wave-2",
-      "day": "28 сер",
+      "day": "8 сер",
       "format": "reel",
       "pillar": "brand",
       "title": "Reel — BTS",
@@ -522,28 +510,10 @@
       "image": "daily-routine-bts-video.mp4"
     },
     {
-      "id": "p24",
-      "order": 24,
+      "id": "p23",
+      "order": 23,
       "phase": "wave-2",
-      "day": "31 сер",
-      "format": "static",
-      "pillar": "community",
-      "title": "Сцена · III",
-      "productionRequired": false,
-      "caption": "Останній трек.\n\nkindsigma.com",
-      "hashtags": [
-        "#kindsigma",
-        "#kindsigmaua",
-        "#onstage",
-        "#live"
-      ],
-      "image": "xp24-3.jpg"
-    },
-    {
-      "id": "p25",
-      "order": 25,
-      "phase": "wave-3",
-      "day": "2 вер",
+      "day": "11 сер",
       "format": "static",
       "pillar": "community",
       "title": "Вечір · III",
