@@ -150,45 +150,68 @@
     saveOverrides();
   }
 
-  // Extra slides the user appended. Plan posts store them in overrides; custom posts keep them in post.slides.
-  function addedSlides(post) { return isCustom(post) ? [] : (state.overrides[post.id]?.addedSlides || []); }
-  function slideCount(post) { return (post.slides?.length || 0) + addedSlides(post).length; }
-  // Every image ref of a post, original resolution, in order (base slides + added slides, or single).
-  function postMediaRefs(post) {
-    if (post.format === 'carousel' || post.slides) {
-      const base = (post.slides || []).map((s, i) => getEffectiveSlideImage(post, i)).filter(Boolean);
-      return base.concat(addedSlides(post));
+  // Unified, ordered list of a carousel's image refs. Plan posts persist edits in
+  // overrides.slidesFull; custom posts persist directly in post.slides.
+  function getSlideRefs(post) {
+    if (isCustom(post)) return (post.slides || []).map(s => s.image).filter(Boolean);
+    const ov = state.overrides[post.id];
+    if (ov && Array.isArray(ov.slidesFull)) return ov.slidesFull.filter(Boolean);
+    const base = (post.slides || []).map((s, i) => getEffectiveSlideImage(post, i));
+    return base.concat(ov?.addedSlides || []).filter(Boolean);
+  }
+  function setSlideRefs(p, refs) {
+    refs = refs.filter(Boolean);
+    if (isCustom(p)) {
+      p.slides = refs.map((ref, i) => ({ image: ref, label: 'Slide ' + (i + 1) }));
+      saveCustom();
+    } else {
+      if (!state.overrides[p.id]) state.overrides[p.id] = {};
+      state.overrides[p.id].slidesFull = refs;
+      delete state.overrides[p.id].slides;
+      delete state.overrides[p.id].addedSlides;
+      saveOverrides();
     }
+  }
+  function slideCount(post) { return getSlideRefs(post).length; }
+  // Every image ref of a post, original resolution, in display order.
+  function postMediaRefs(post) {
+    if (post.format === 'carousel' || post.slides) return getSlideRefs(post);
     const t = getThumbnail(post); return t ? [t] : [];
   }
-  // Get the "thumbnail" image to show on a tile (first available image for carousel, main image for static)
   function getThumbnail(post) {
-    if (post.format === 'carousel') {
-      if (post.slides) for (let i = 0; i < post.slides.length; i++) { const img = getEffectiveSlideImage(post, i); if (img) return img; }
-      const add = addedSlides(post);
-      if (add.length) return add[0];
-      return null;
-    }
+    if (post.format === 'carousel') { const r = getSlideRefs(post); return r.length ? r[0] : null; }
     return getEffectiveImage(post);
   }
-  function addSlide(p) {
-    openPicker((ref) => {
-      if (isCustom(p)) {
-        if (!Array.isArray(p.slides)) p.slides = [];
-        p.slides.push({ image: ref, label: 'Slide ' + (p.slides.length + 1) });
-        saveCustom();
-      } else {
-        if (!state.overrides[p.id]) state.overrides[p.id] = {};
-        if (!state.overrides[p.id].addedSlides) state.overrides[p.id].addedSlides = [];
-        state.overrides[p.id].addedSlides.push(ref);
-        saveOverrides();
-      }
-      openModal(p); renderGrid();
-    });
+  function moveSlide(p, idx, dir) {
+    const refs = getSlideRefs(p); const j = idx + dir;
+    if (j < 0 || j >= refs.length) return;
+    [refs[idx], refs[j]] = [refs[j], refs[idx]];
+    setSlideRefs(p, refs); openModal(p); renderGrid();
   }
-  function removeAddedSlide(p, j) {
-    const arr = state.overrides[p.id]?.addedSlides;
-    if (arr) { arr.splice(j, 1); saveOverrides(); openModal(p); renderGrid(); }
+  function removeSlide(p, idx) {
+    const refs = getSlideRefs(p); refs.splice(idx, 1);
+    setSlideRefs(p, refs); openModal(p); renderGrid();
+  }
+  function changeSlide(p, idx, ref) {
+    const refs = getSlideRefs(p); refs[idx] = ref;
+    setSlideRefs(p, refs); openModal(p); renderGrid();
+  }
+  function addSlideRefs(p, newRefs) {
+    if (!newRefs || !newRefs.length) return;
+    setSlideRefs(p, getSlideRefs(p).concat(newRefs)); openModal(p); renderGrid();
+  }
+  // Read several image files -> data URLs, preserving selection order.
+  function filesToDataURLs(files, maxDim, cb) {
+    const out = new Array(files.length); let pending = files.length;
+    if (!pending) return cb([]);
+    files.forEach((f, i) => fileToDataURL(f, maxDim, durl => { out[i] = durl; if (--pending === 0) cb(out.filter(Boolean)); }));
+  }
+  // "+ Add photos": open a multi-select file dialog and append all as slides.
+  function uploadSlides(p) {
+    const inp = Object.assign(document.createElement('input'), { type: 'file', accept: 'image/*', multiple: true });
+    inp.style.display = 'none'; document.body.appendChild(inp);
+    inp.onchange = () => { const files = [...inp.files]; inp.remove(); filesToDataURLs(files, 1600, refs => addSlideRefs(p, refs)); };
+    inp.click();
   }
 
   /* Fetch image listings from http.server */
@@ -665,74 +688,56 @@
     }
   }
 
-  function slideSlot(p, num, label, img, actionsBuilder) {
-    const slot = el('div', 'slide-slot');
-    const head = el('div', 'slide-head');
-    head.appendChild(el('span', 'slide-num', String(num)));
-    head.appendChild(el('span', 'slide-label', label));
-    slot.appendChild(head);
-    const inner = el('div', 'slide-inner');
-    if (img) {
-      const path = mediaPath(img);
-      if (isVideoFile(img)) { const v = document.createElement('video'); v.src = path; v.muted = true; v.controls = true; v.preload = 'metadata'; inner.appendChild(v); }
-      else { const i = document.createElement('img'); i.src = path; i.alt = label || ''; inner.appendChild(i); }
-    } else {
-      inner.appendChild(el('div', 'slide-placeholder', label));
-    }
-    slot.appendChild(inner);
-    const actions = el('div', 'slide-actions');
-    if (img) {
+  function renderCarouselSlides(wrap, p) {
+    wrap.classList.add('carousel-stack');
+    const refs = getSlideRefs(p);
+    refs.forEach((ref, idx) => {
+      const slot = el('div', 'slide-slot');
+      const head = el('div', 'slide-head');
+      head.appendChild(el('span', 'slide-num', String(idx + 1)));
+      const move = el('div', 'slide-move');
+      const up = el('button', 'move-btn', '↑'); up.title = 'Move up'; up.disabled = idx === 0;
+      up.onclick = (e) => { e.stopPropagation(); moveSlide(p, idx, -1); };
+      const down = el('button', 'move-btn', '↓'); down.title = 'Move down'; down.disabled = idx === refs.length - 1;
+      down.onclick = (e) => { e.stopPropagation(); moveSlide(p, idx, 1); };
+      move.appendChild(up); move.appendChild(down);
+      head.appendChild(move);
+      slot.appendChild(head);
+
+      const inner = el('div', 'slide-inner');
+      const path = mediaPath(ref);
+      if (isVideoFile(ref)) { const v = document.createElement('video'); v.src = path; v.muted = true; v.controls = true; v.preload = 'metadata'; inner.appendChild(v); }
+      else { const im = document.createElement('img'); im.src = path; inner.appendChild(im); }
+      slot.appendChild(inner);
+
+      const actions = el('div', 'slide-actions');
+      const change = el('button', 'swap-btn-sm', 'Change');
+      change.onclick = (e) => { e.stopPropagation(); openPicker(ref2 => changeSlide(p, idx, ref2)); };
+      actions.appendChild(change);
       const dl = el('button', 'swap-btn-sm', '⤓ Download');
       dl.onclick = (e) => {
         e.stopPropagation();
-        const name = String(img).startsWith('data:') ? (slugify(p.title) || 'post') + '-' + num + '.jpg' : String(img).split('/').pop();
-        downloadMedia(img, name);
+        const name = String(ref).startsWith('data:') ? (slugify(p.title) || 'post') + '-' + (idx + 1) + '.jpg' : String(ref).split('/').pop();
+        downloadMedia(ref, name);
       };
       actions.appendChild(dl);
-    }
-    if (actionsBuilder) actionsBuilder(actions);
-    slot.appendChild(actions);
-    return slot;
-  }
-
-  function renderCarouselSlides(wrap, p) {
-    wrap.classList.add('carousel-stack');
-    const base = p.slides || [];
-    base.forEach((slide, idx) => {
-      const img = getEffectiveSlideImage(p, idx);
-      const slot = slideSlot(p, idx + 1, slide.label || ('Slide ' + (idx + 1)), img, (actions) => {
-        const swap = el('button', 'swap-btn-sm', img ? 'Change' : 'Pick image');
-        swap.onclick = (e) => { e.stopPropagation(); openPicker((file) => { setSlideOverride(p.id, idx, file); openModal(p); renderGrid(); }); };
-        actions.appendChild(swap);
-        if (state.overrides[p.id]?.slides?.[idx]) {
-          const reset = el('button', 'reset-btn-sm', 'Reset');
-          reset.onclick = (e) => { e.stopPropagation(); clearOverride(p.id, idx); openModal(p); renderGrid(); };
-          actions.appendChild(reset);
-        }
-        if (isCustom(p) && base.length > 1) {
-          const rm = el('button', 'reset-btn-sm', 'Remove');
-          rm.onclick = (e) => { e.stopPropagation(); p.slides.splice(idx, 1); saveCustom(); openModal(p); renderGrid(); };
-          actions.appendChild(rm);
-        }
-      });
-      wrap.appendChild(slot);
-    });
-    // Extra slides the user appended to a plan post (stored as overrides.addedSlides)
-    addedSlides(p).forEach((ref, j) => {
-      const slot = slideSlot(p, base.length + j + 1, 'Added photo', ref, (actions) => {
-        const swap = el('button', 'swap-btn-sm', 'Change');
-        swap.onclick = (e) => { e.stopPropagation(); openPicker((file) => { state.overrides[p.id].addedSlides[j] = file; saveOverrides(); openModal(p); renderGrid(); }); };
-        actions.appendChild(swap);
+      if (refs.length > 1) {
         const rm = el('button', 'reset-btn-sm', 'Remove');
-        rm.onclick = (e) => { e.stopPropagation(); removeAddedSlide(p, j); };
+        rm.onclick = (e) => { e.stopPropagation(); removeSlide(p, idx); };
         actions.appendChild(rm);
-      });
+      }
+      slot.appendChild(actions);
       wrap.appendChild(slot);
     });
-    // Add photo
-    const addBtn = el('button', 'slide-add-btn', '+ Add photo');
-    addBtn.onclick = (e) => { e.stopPropagation(); addSlide(p); };
-    wrap.appendChild(addBtn);
+
+    const addRow = el('div', 'slide-add-row');
+    const addUp = el('button', 'slide-add-btn', '+ Add photos');
+    addUp.onclick = (e) => { e.stopPropagation(); uploadSlides(p); };
+    addRow.appendChild(addUp);
+    const addExisting = el('button', 'slide-add-btn ghost', 'Choose existing');
+    addExisting.onclick = (e) => { e.stopPropagation(); openPicker(ref => addSlideRefs(p, [ref])); };
+    addRow.appendChild(addExisting);
+    wrap.appendChild(addRow);
   }
 
   function elInner(tag, cls, html) { const e = el(tag, cls); e.innerHTML = html; return e; }
