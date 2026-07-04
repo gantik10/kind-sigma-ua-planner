@@ -5,11 +5,9 @@
     "currency": "UAH",
     "basePrice": 5900,
     "generatedAt": "2026-07-06",
-    "version": "v5",
-    "voice": "Factual, third-person about the product. No emojis. No exclamation marks. No @ tags. No location/geo references. Ends with: availability line + WWW.KINDSIGMA.COM.",
-    "payment": "Накладений платіж · передоплата на картку · оплата через сайт",
-    "schedule": "Дроп 6 липня (3 пости), далі новий пост кожні 2–3 дні.",
-    "note": "24 пости з наявних фото/відео. Схожі серії (вулиця, яхта, сцена, вечірка) розбиті на окремі пости; справжні серії та продуктові герої лишаються каруселями. Кожен слайд — реальне медіа."
+    "version": "v6",
+    "voice": "Minimal / editorial Ukrainian. Short, mood-first. No spec dumps, no repeated availability boilerplate. Ends only with kindsigma.com.",
+    "note": "25 постів з наявних фото/відео. HALIA-серія розбита на окремі пости; halia-black прибрано. Мінімалістичні підписи."
   },
   "phases": [
     {
@@ -25,6 +23,11 @@
     {
       "id": "wave-2",
       "label": "Серпень",
+      "color": "#7A6952"
+    },
+    {
+      "id": "wave-3",
+      "label": "Вересень",
       "color": "#9B8B7A"
     }
   ],
@@ -36,10 +39,6 @@
     "product": {
       "label": "Product Hero",
       "color": "#8B7355"
-    },
-    "ugc": {
-      "label": "UGC / Соц-доказ",
-      "color": "#D4A574"
     },
     "lifestyle": {
       "label": "Lifestyle",
@@ -66,29 +65,24 @@
       "day": "Дроп · 6 лип",
       "format": "carousel",
       "pillar": "brand",
-      "title": "GENESIS — The Origin Collection",
+      "title": "GENESIS",
       "productionRequired": false,
-      "caption": "GENESIS — геометрична унісекс-оправа з італійського ацетату Mazzucchelli. Лінзи CR39 категорії 3 з повним захистом UV400. Гравіювання Origin Collection на дужці.\n\nДоступно у кольорах Black, Blue та Red.\n\nЦіна 5900 грн.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
+      "caption": "GENESIS.\nХарактер у чистій геометрії — чорний, синій, червоний.\n\nkindsigma.com",
       "hashtags": [
         "#kindsigma",
         "#kindsigmaua",
         "#genesis",
-        "#genesisred",
         "#theorigincollection",
-        "#italianacetate",
-        "#mazzucchelli",
-        "#uv400",
-        "#sunglasses",
-        "#eyewear"
+        "#sunglasses"
       ],
       "slides": [
         {
           "image": "genesis-frame-scan.jpg",
-          "label": "Слайд 1 · дужка з гравіюванням"
+          "label": "Дужка з гравіюванням"
         },
         {
           "image": "genesis-red-text.jpg",
-          "label": "Слайд 2 · GENESIS RED"
+          "label": "GENESIS RED"
         }
       ]
     },
@@ -97,272 +91,225 @@
       "order": 2,
       "phase": "drop",
       "day": "Дроп · 6 лип",
-      "format": "carousel",
+      "format": "static",
       "pillar": "product",
-      "title": "HALIA — quiet confidence",
+      "title": "HALIA",
       "productionRequired": false,
-      "caption": "HALIA — унісекс-оправа, що втілює спокійну впевненість та позачасову елегантність. Глянцевий чорний італійський ацетат Mazzucchelli, лінзи CR39 категорії 3, UV400.\n\nЦіна 5900 грн.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
+      "caption": "HALIA.\nТиха впевненість, яку не треба пояснювати.\n\nkindsigma.com",
       "hashtags": [
         "#kindsigma",
         "#kindsigmaua",
         "#halia",
         "#theorigincollection",
-        "#italianacetate",
-        "#mazzucchelli",
-        "#timelesselegance",
-        "#sunglasses",
-        "#eyewear"
+        "#sunglasses"
       ],
-      "slides": [
-        {
-          "image": "halia-jane.jpg",
-          "label": "Слайд 1 · hero"
-        },
-        {
-          "image": "halia-evge-1.jpg",
-          "label": "Слайд 2 · editorial"
-        },
-        {
-          "image": "halia-evge-2.jpg",
-          "label": "Слайд 3 · editorial"
-        }
-      ]
+      "image": "halia-jane.jpg"
     },
     {
       "id": "p3",
       "order": 3,
-      "phase": "drop",
-      "day": "Дроп · 6 лип",
+      "phase": "wave-1",
+      "day": "9 лип",
       "format": "static",
-      "pillar": "ugc",
-      "title": "HALIA off-duty",
+      "pillar": "product",
+      "title": "HALIA — editorial",
       "productionRequired": false,
-      "caption": "HALIA поза кадром. Легка форма, що тримається на обличчі увесь день.\n\nЧорний ацетат Mazzucchelli, UV400.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
+      "caption": "HALIA тримає паузу.\n\nkindsigma.com",
       "hashtags": [
         "#kindsigma",
         "#kindsigmaua",
         "#halia",
-        "#everydayeyewear",
-        "#uv400",
-        "#sunglasses",
-        "#eyewear"
+        "#editorial",
+        "#sunglasses"
       ],
-      "image": "halia-black-nastystonem.jpg"
+      "image": "halia-evge-1.jpg"
     },
     {
       "id": "p4",
       "order": 4,
       "phase": "wave-1",
-      "day": "9 лип",
+      "day": "12 лип",
       "format": "static",
-      "pillar": "brand",
-      "title": "HALIA — in-room dining",
+      "pillar": "trend",
+      "title": "Вулиця · I",
       "productionRequired": false,
-      "caption": "Подається до столу. HALIA — коли аксесуар стає головною стравою.\n\nІталійський ацетат Mazzucchelli, UV400.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
+      "caption": "Місто прокидається. Тонка оправа вже на місці.\n\nkindsigma.com",
       "hashtags": [
         "#kindsigma",
         "#kindsigmaua",
-        "#halia",
-        "#stilllife",
-        "#theorigincollection",
-        "#sunglasses",
-        "#eyewear"
+        "#streetstyle",
+        "#ootd"
       ],
-      "image": "halia-havana-hotel.jpg"
+      "image": "brooklyn-1.jpg"
     },
     {
       "id": "p5",
       "order": 5,
       "phase": "wave-1",
-      "day": "12 лип",
-      "format": "static",
-      "pillar": "trend",
-      "title": "Вуличний вихід · I",
-      "productionRequired": false,
-      "caption": "Коричневий костюм і тонка оправа. Місто прокидається.\n\nУнісекс-оправа з італійського ацетату Mazzucchelli, UV400.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
-      "hashtags": [
-        "#kindsigma",
-        "#kindsigmaua",
-        "#streetstyle",
-        "#ootd",
-        "#italianacetate",
-        "#sunglasses",
-        "#eyewear"
-      ],
-      "image": "brooklyn-1.jpg"
-    },
-    {
-      "id": "p6",
-      "order": 6,
-      "phase": "wave-1",
       "day": "14 лип",
       "format": "reel",
       "pillar": "product",
-      "title": "Просто подивіться на них",
+      "title": "Reel",
       "productionRequired": false,
-      "caption": "Просто подивіться на них.\n\nThe Origin Collection. Італійський ацетат Mazzucchelli, UV400.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
+      "caption": "Просто подивіться на них.\n\nkindsigma.com",
       "hashtags": [
         "#kindsigma",
         "#kindsigmaua",
         "#reels",
-        "#theorigincollection",
-        "#mazzucchelli",
         "#sunglasses",
-        "#eyewear"
+        "#theorigincollection"
       ],
       "image": "beauties-video.mp4"
     },
     {
-      "id": "p7",
-      "order": 7,
+      "id": "p6",
+      "order": 6,
       "phase": "wave-1",
       "day": "17 лип",
       "format": "static",
       "pillar": "lifestyle",
       "title": "Золота година · I",
       "productionRequired": false,
-      "caption": "Літо на воді. Темні лінзи проти сонця.\n\nЛінзи CR39 категорії 3, UV400.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
+      "caption": "Літо на воді, темні лінзи проти сонця.\n\nkindsigma.com",
       "hashtags": [
         "#kindsigma",
         "#kindsigmaua",
         "#summer",
-        "#goldenhour",
-        "#uv400",
-        "#sunglasses",
-        "#eyewear"
+        "#goldenhour"
       ],
       "image": "coaching-1.jpg"
     },
     {
-      "id": "p8",
-      "order": 8,
+      "id": "p7",
+      "order": 7,
       "phase": "wave-1",
       "day": "19 лип",
       "format": "carousel",
       "pillar": "lifestyle",
       "title": "THE DAILY ROUTINE SERIES",
       "productionRequired": false,
-      "caption": "THE DAILY ROUTINE SERIES. Ідеально зварене еспресо, яйце некруто — і оправа, що завжди поруч.\n\nThe Origin Collection. UV400.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
+      "caption": "THE DAILY ROUTINE SERIES.\nЕспресо, яйце некруто — і оправа поруч.\n\nkindsigma.com",
       "hashtags": [
         "#kindsigma",
         "#kindsigmaua",
         "#dailyroutine",
-        "#stilllife",
-        "#morningritual",
-        "#theorigincollection",
-        "#sunglasses",
-        "#eyewear"
+        "#stilllife"
       ],
       "slides": [
         {
           "image": "daily-routine-espresso-1.jpg",
-          "label": "Слайд 1 · еспресо"
+          "label": "Еспресо"
         },
         {
           "image": "daily-routine-espresso-2.jpg",
-          "label": "Слайд 2 · яйце некруто"
+          "label": "Яйце некруто"
         },
         {
           "image": "daily-routine-morning-1.jpg",
-          "label": "Слайд 3 · ранок"
+          "label": "Ранок"
         },
         {
           "image": "daily-routine-morning-2.jpg",
-          "label": "Слайд 4 · деталі"
+          "label": "Деталі"
         }
       ]
+    },
+    {
+      "id": "p8",
+      "order": 8,
+      "phase": "wave-1",
+      "day": "22 лип",
+      "format": "static",
+      "pillar": "community",
+      "title": "Сцена · I",
+      "productionRequired": false,
+      "caption": "Світло гасне. Оправа лишається.\n\nkindsigma.com",
+      "hashtags": [
+        "#kindsigma",
+        "#kindsigmaua",
+        "#onstage",
+        "#live"
+      ],
+      "image": "xp24-1.jpg"
     },
     {
       "id": "p9",
       "order": 9,
       "phase": "wave-1",
-      "day": "22 лип",
+      "day": "24 лип",
       "format": "static",
-      "pillar": "community",
-      "title": "На сцені · I",
+      "pillar": "trend",
+      "title": "Вулиця · II",
       "productionRequired": false,
-      "caption": "Світло гасне, оправа лишається. На сцені.\n\nThe Origin Collection. UV400.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
+      "caption": "Спокій і структура. Другий кадр.\n\nkindsigma.com",
       "hashtags": [
         "#kindsigma",
         "#kindsigmaua",
-        "#onstage",
-        "#live",
-        "#theorigincollection",
-        "#sunglasses",
-        "#eyewear"
+        "#streetstyle",
+        "#ootd"
       ],
-      "image": "xp24-1.jpg"
+      "image": "brooklyn-2.jpg"
     },
     {
       "id": "p10",
       "order": 10,
       "phase": "wave-1",
-      "day": "24 лип",
+      "day": "27 лип",
       "format": "static",
-      "pillar": "trend",
-      "title": "Вуличний вихід · II",
+      "pillar": "community",
+      "title": "Вечір · I",
       "productionRequired": false,
-      "caption": "Другий кадр серії. Спокій і структура.\n\nІталійський ацетат Mazzucchelli, UV400.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
+      "caption": "Вечір тільки починається.\n\nkindsigma.com",
       "hashtags": [
         "#kindsigma",
         "#kindsigmaua",
-        "#streetstyle",
-        "#ootd",
-        "#italianacetate",
-        "#sunglasses",
-        "#eyewear"
+        "#nightout",
+        "#goodtimes"
       ],
-      "image": "brooklyn-2.jpg"
+      "image": "ugc-vadim-1.jpg"
     },
     {
       "id": "p11",
       "order": 11,
       "phase": "wave-1",
-      "day": "27 лип",
+      "day": "29 лип",
       "format": "static",
-      "pillar": "community",
-      "title": "Гарні часи · I",
+      "pillar": "brand",
+      "title": "HALIA — in-room dining",
       "productionRequired": false,
-      "caption": "Вечір тільки починається.\n\nThe Origin Collection. UV400.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
+      "caption": "Подається до столу.\nHALIA як головна страва.\n\nkindsigma.com",
       "hashtags": [
         "#kindsigma",
         "#kindsigmaua",
-        "#goodtimes",
-        "#nightout",
-        "#theorigincollection",
-        "#sunglasses",
-        "#eyewear"
+        "#halia",
+        "#stilllife"
       ],
-      "image": "ugc-vadim-1.jpg"
+      "image": "halia-havana-hotel.jpg"
     },
     {
       "id": "p12",
       "order": 12,
-      "phase": "wave-1",
-      "day": "29 лип",
+      "phase": "wave-2",
+      "day": "1 сер",
       "format": "carousel",
       "pillar": "trend",
-      "title": "Срібло і мереживо",
+      "title": "Срібло",
       "productionRequired": false,
-      "caption": "Срібло і чорне мереживо. Оправа як завершальний акцент образу.\n\nThe Origin Collection. Італійський ацетат Mazzucchelli, UV400.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
+      "caption": "Срібло і чорне мереживо.\nОправа як фінальний штрих.\n\nkindsigma.com",
       "hashtags": [
         "#kindsigma",
         "#kindsigmaua",
         "#styling",
-        "#accessories",
-        "#ootd",
-        "#theorigincollection",
-        "#sunglasses",
-        "#eyewear"
+        "#accessories"
       ],
       "slides": [
         {
           "image": "fltrd-1.jpg",
-          "label": "Слайд 1"
+          "label": "Кадр 1"
         },
         {
           "image": "fltrd-2.jpg",
-          "label": "Слайд 2"
+          "label": "Кадр 2"
         }
       ]
     },
@@ -370,20 +317,17 @@
       "id": "p13",
       "order": 13,
       "phase": "wave-2",
-      "day": "1 сер",
+      "day": "3 сер",
       "format": "static",
       "pillar": "trend",
-      "title": "Вуличний вихід · III",
+      "title": "Вулиця · III",
       "productionRequired": false,
-      "caption": "Костюм oversize, чоботи, впевнений крок.\n\nУнісекс-оправа, UV400.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
+      "caption": "Oversize і впевнений крок.\n\nkindsigma.com",
       "hashtags": [
         "#kindsigma",
         "#kindsigmaua",
         "#streetstyle",
-        "#ootd",
-        "#uv400",
-        "#sunglasses",
-        "#eyewear"
+        "#ootd"
       ],
       "image": "brooklyn-3.jpg"
     },
@@ -391,20 +335,17 @@
       "id": "p14",
       "order": 14,
       "phase": "wave-2",
-      "day": "3 сер",
+      "day": "6 сер",
       "format": "reel",
       "pillar": "lifestyle",
-      "title": "Заряджений, як улюблена кава",
+      "title": "Reel",
       "productionRequired": false,
-      "caption": "Бадьорий, живий, заряджений — як улюблена кава.\n\nThe Origin Collection. UV400.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
+      "caption": "Бадьоро, як улюблена кава.\n\nkindsigma.com",
       "hashtags": [
         "#kindsigma",
         "#kindsigmaua",
         "#reels",
-        "#coffee",
-        "#theorigincollection",
-        "#sunglasses",
-        "#eyewear"
+        "#coffee"
       ],
       "image": "bublyk-video.mp4"
     },
@@ -412,20 +353,17 @@
       "id": "p15",
       "order": 15,
       "phase": "wave-2",
-      "day": "6 сер",
+      "day": "8 сер",
       "format": "static",
       "pillar": "lifestyle",
       "title": "Золота година · II",
       "productionRequired": false,
-      "caption": "Кавун, музика і сонце на шкірі.\n\nThe Origin Collection. UV400.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
+      "caption": "Сонце на шкірі, музика поруч.\n\nkindsigma.com",
       "hashtags": [
         "#kindsigma",
         "#kindsigmaua",
         "#summer",
-        "#goldenhour",
-        "#theorigincollection",
-        "#sunglasses",
-        "#eyewear"
+        "#goldenhour"
       ],
       "image": "coaching-2.jpg"
     },
@@ -433,29 +371,26 @@
       "id": "p16",
       "order": 16,
       "phase": "wave-2",
-      "day": "8 сер",
+      "day": "11 сер",
       "format": "carousel",
       "pillar": "lifestyle",
       "title": "Повільний день",
       "productionRequired": false,
-      "caption": "Повільний день. Кава, світло і бурштинові лінзи.\n\nThe Origin Collection. UV400.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
+      "caption": "Повільний день. Кава і бурштинові лінзи.\n\nkindsigma.com",
       "hashtags": [
         "#kindsigma",
         "#kindsigmaua",
         "#slowliving",
-        "#cafe",
-        "#theorigincollection",
-        "#sunglasses",
-        "#eyewear"
+        "#cafe"
       ],
       "slides": [
         {
           "image": "dubai-streetstyle-1.jpg",
-          "label": "Слайд 1"
+          "label": "Кадр 1"
         },
         {
           "image": "dubai-streetstyle-3.jpg",
-          "label": "Слайд 2"
+          "label": "Кадр 2"
         }
       ]
     },
@@ -463,20 +398,17 @@
       "id": "p17",
       "order": 17,
       "phase": "wave-2",
-      "day": "11 сер",
+      "day": "13 сер",
       "format": "static",
       "pillar": "community",
-      "title": "На сцені · II",
+      "title": "Сцена · II",
       "productionRequired": false,
-      "caption": "Руки вгору. Оправа тримає темп вечора.\n\nThe Origin Collection. UV400.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
+      "caption": "Руки вгору. Темп вечора.\n\nkindsigma.com",
       "hashtags": [
         "#kindsigma",
         "#kindsigmaua",
         "#onstage",
-        "#live",
-        "#theorigincollection",
-        "#sunglasses",
-        "#eyewear"
+        "#live"
       ],
       "image": "xp24-2.jpg"
     },
@@ -484,41 +416,35 @@
       "id": "p18",
       "order": 18,
       "phase": "wave-2",
-      "day": "13 сер",
+      "day": "16 сер",
       "format": "static",
-      "pillar": "trend",
-      "title": "Вуличний вихід · IV",
+      "pillar": "product",
+      "title": "HALIA — editorial",
       "productionRequired": false,
-      "caption": "Профіль і гравіювання KIND SIGMA на дужці.\n\nІталійський ацетат Mazzucchelli, UV400.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
+      "caption": "Пауза між кадрами.\nHALIA.\n\nkindsigma.com",
       "hashtags": [
         "#kindsigma",
         "#kindsigmaua",
-        "#streetstyle",
-        "#ootd",
-        "#mazzucchelli",
-        "#sunglasses",
-        "#eyewear"
+        "#halia",
+        "#editorial"
       ],
-      "image": "brooklyn-4.jpg"
+      "image": "halia-evge-2.jpg"
     },
     {
       "id": "p19",
       "order": 19,
       "phase": "wave-2",
-      "day": "16 сер",
+      "day": "18 сер",
       "format": "static",
       "pillar": "community",
-      "title": "Гарні часи · II",
+      "title": "Вечір · II",
       "productionRequired": false,
-      "caption": "Конфеті, музика, свої люди.\n\nThe Origin Collection. UV400.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
+      "caption": "Конфеті і свої люди.\n\nkindsigma.com",
       "hashtags": [
         "#kindsigma",
         "#kindsigmaua",
-        "#goodtimes",
         "#nightout",
-        "#theorigincollection",
-        "#sunglasses",
-        "#eyewear"
+        "#goodtimes"
       ],
       "image": "ugc-vadim-2.jpg"
     },
@@ -526,20 +452,17 @@
       "id": "p20",
       "order": 20,
       "phase": "wave-2",
-      "day": "18 сер",
+      "day": "21 сер",
       "format": "static",
       "pillar": "character",
-      "title": "Brooklyn — душа офісу",
+      "title": "Brooklyn",
       "productionRequired": false,
-      "caption": "Brooklyn — душа офісу. Сьогодні у ролі моделі.\n\nThe Origin Collection. UV400.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
+      "caption": "Brooklyn. Душа офісу — сьогодні в кадрі.\n\nkindsigma.com",
       "hashtags": [
         "#kindsigma",
         "#kindsigmaua",
         "#dogsofinstagram",
-        "#officedog",
-        "#theorigincollection",
-        "#sunglasses",
-        "#eyewear"
+        "#officedog"
       ],
       "image": "brooklyn-charming.jpg"
     },
@@ -547,83 +470,90 @@
       "id": "p21",
       "order": 21,
       "phase": "wave-2",
-      "day": "21 сер",
+      "day": "23 сер",
       "format": "static",
-      "pillar": "lifestyle",
-      "title": "Золота година · III",
+      "pillar": "trend",
+      "title": "Вулиця · IV",
       "productionRequired": false,
-      "caption": "Місто на горизонті, вода під заходом сонця.\n\nЛінзи CR39 категорії 3, UV400.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
+      "caption": "Профіль. І гравіювання на дужці.\n\nkindsigma.com",
       "hashtags": [
         "#kindsigma",
         "#kindsigmaua",
-        "#summer",
-        "#goldenhour",
-        "#uv400",
-        "#sunglasses",
-        "#eyewear"
+        "#streetstyle",
+        "#ootd"
       ],
-      "image": "coaching-3.jpg"
+      "image": "brooklyn-4.jpg"
     },
     {
       "id": "p22",
       "order": 22,
       "phase": "wave-2",
-      "day": "23 сер",
-      "format": "reel",
-      "pillar": "brand",
-      "title": "За лаштунками офісу",
+      "day": "26 сер",
+      "format": "static",
+      "pillar": "lifestyle",
+      "title": "Золота година · III",
       "productionRequired": false,
-      "caption": "За лаштунками офісу KIND SIGMA. Як народжується щоденна рутина бренду.\n\nThe Origin Collection.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
+      "caption": "Місто на горизонті. Захід сонця.\n\nkindsigma.com",
       "hashtags": [
         "#kindsigma",
         "#kindsigmaua",
-        "#reels",
-        "#bts",
-        "#behindthescenes",
-        "#sunglasses",
-        "#eyewear"
+        "#summer",
+        "#goldenhour"
       ],
-      "image": "daily-routine-bts-video.mp4"
+      "image": "coaching-3.jpg"
     },
     {
       "id": "p23",
       "order": 23,
       "phase": "wave-2",
-      "day": "26 сер",
-      "format": "static",
-      "pillar": "community",
-      "title": "На сцені · III",
+      "day": "28 сер",
+      "format": "reel",
+      "pillar": "brand",
+      "title": "Reel — BTS",
       "productionRequired": false,
-      "caption": "Останній трек. Профіль у контровому світлі.\n\nThe Origin Collection. UV400.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
+      "caption": "За лаштунками офісу KIND SIGMA.\n\nkindsigma.com",
       "hashtags": [
         "#kindsigma",
         "#kindsigmaua",
-        "#onstage",
-        "#live",
-        "#theorigincollection",
-        "#sunglasses",
-        "#eyewear"
+        "#reels",
+        "#bts",
+        "#behindthescenes"
       ],
-      "image": "xp24-3.jpg"
+      "image": "daily-routine-bts-video.mp4"
     },
     {
       "id": "p24",
       "order": 24,
       "phase": "wave-2",
-      "day": "28 сер",
+      "day": "31 сер",
       "format": "static",
       "pillar": "community",
-      "title": "Гарні часи · III",
+      "title": "Сцена · III",
       "productionRequired": false,
-      "caption": "Дякуємо всім, хто був поруч.\n\nThe Origin Collection. UV400.\n\nДоступно в Україні через Direct.\n\nWWW.KINDSIGMA.COM",
+      "caption": "Останній трек.\n\nkindsigma.com",
+      "hashtags": [
+        "#kindsigma",
+        "#kindsigmaua",
+        "#onstage",
+        "#live"
+      ],
+      "image": "xp24-3.jpg"
+    },
+    {
+      "id": "p25",
+      "order": 25,
+      "phase": "wave-3",
+      "day": "2 вер",
+      "format": "static",
+      "pillar": "community",
+      "title": "Вечір · III",
+      "productionRequired": false,
+      "caption": "Дякуємо всім, хто був поруч.\n\nkindsigma.com",
       "hashtags": [
         "#kindsigma",
         "#kindsigmaua",
         "#goodtimes",
-        "#community",
-        "#theorigincollection",
-        "#sunglasses",
-        "#eyewear"
+        "#community"
       ],
       "image": "ugc-vadim-3.jpg"
     }
