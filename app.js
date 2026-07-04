@@ -119,7 +119,9 @@
   function isVideoFile(name) { return name && /\.(mp4|mov|webm)$/i.test(name); }
 
   function bindBio() {
-    document.querySelector('.bio').textContent = 'KIND SIGMA · The Origin Collection · Italian Mazzucchelli acetate · UV400 · Available in Ukraine through Direct';
+    document.querySelector('.bio').innerHTML =
+      'Не для того, щоб тебе бачили.<br>А щоб бачити інакше.<br>' +
+      'Українська сторінка @kindsigma · Emirati eyewear · Italian Mazzucchelli acetate<br>kindsigma.com';
   }
 
   function renderTabs() {
