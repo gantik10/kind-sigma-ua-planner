@@ -5,7 +5,7 @@
     "currency": "UAH",
     "basePrice": 5900,
     "generatedAt": "2026-07-06",
-    "version": "v6",
+    "version": "v7",
     "voice": "Minimal / editorial Ukrainian. Short, mood-first. No spec dumps, no repeated availability boilerplate. Ends only with kindsigma.com.",
     "note": "25 постів з наявних фото/відео. HALIA-серія розбита на окремі пости; halia-black прибрано. Мінімалістичні підписи."
   },
@@ -93,17 +93,16 @@
       "day": "Дроп · 6 лип",
       "format": "static",
       "pillar": "product",
-      "title": "HALIA",
+      "title": "HALIA — in-room dining",
       "productionRequired": false,
-      "caption": "HALIA.\nТиха впевненість, яку не треба пояснювати.\n\nkindsigma.com",
+      "caption": "Подається до столу.\nHALIA як головна страва.\n\nkindsigma.com",
       "hashtags": [
         "#kindsigma",
         "#kindsigmaua",
         "#halia",
-        "#theorigincollection",
-        "#sunglasses"
+        "#stilllife"
       ],
-      "image": "halia-jane.jpg"
+      "image": "halia-havana-hotel.jpg"
     },
     {
       "id": "p3",
@@ -274,17 +273,18 @@
       "phase": "wave-1",
       "day": "29 лип",
       "format": "static",
-      "pillar": "brand",
-      "title": "HALIA — in-room dining",
+      "pillar": "product",
+      "title": "HALIA",
       "productionRequired": false,
-      "caption": "Подається до столу.\nHALIA як головна страва.\n\nkindsigma.com",
+      "caption": "HALIA.\nТиха впевненість, яку не треба пояснювати.\n\nkindsigma.com",
       "hashtags": [
         "#kindsigma",
         "#kindsigmaua",
         "#halia",
-        "#stilllife"
+        "#theorigincollection",
+        "#sunglasses"
       ],
-      "image": "halia-havana-hotel.jpg"
+      "image": "halia-jane.jpg"
     },
     {
       "id": "p12",
