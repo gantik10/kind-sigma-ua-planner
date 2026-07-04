@@ -53,9 +53,7 @@
   }
   // Download every image of a post (original resolution). Carousel slides are staggered.
   function downloadPostMedia(p) {
-    let refs;
-    if (p.slides) refs = p.slides.map((s, i) => getEffectiveSlideImage(p, i)).filter(Boolean);
-    else { const t = getThumbnail(p); refs = t ? [t] : []; }
+    const refs = postMediaRefs(p);
     refs.forEach((ref, i) => {
       const name = String(ref).startsWith('data:')
         ? (slugify(p.title) || 'post') + (refs.length > 1 ? '-' + (i + 1) : '') + '.jpg'
@@ -152,16 +150,45 @@
     saveOverrides();
   }
 
+  // Extra slides the user appended. Plan posts store them in overrides; custom posts keep them in post.slides.
+  function addedSlides(post) { return isCustom(post) ? [] : (state.overrides[post.id]?.addedSlides || []); }
+  function slideCount(post) { return (post.slides?.length || 0) + addedSlides(post).length; }
+  // Every image ref of a post, original resolution, in order (base slides + added slides, or single).
+  function postMediaRefs(post) {
+    if (post.format === 'carousel' || post.slides) {
+      const base = (post.slides || []).map((s, i) => getEffectiveSlideImage(post, i)).filter(Boolean);
+      return base.concat(addedSlides(post));
+    }
+    const t = getThumbnail(post); return t ? [t] : [];
+  }
   // Get the "thumbnail" image to show on a tile (first available image for carousel, main image for static)
   function getThumbnail(post) {
-    if (post.format === 'carousel' && post.slides) {
-      for (let i = 0; i < post.slides.length; i++) {
-        const img = getEffectiveSlideImage(post, i);
-        if (img) return img;
-      }
+    if (post.format === 'carousel') {
+      if (post.slides) for (let i = 0; i < post.slides.length; i++) { const img = getEffectiveSlideImage(post, i); if (img) return img; }
+      const add = addedSlides(post);
+      if (add.length) return add[0];
       return null;
     }
     return getEffectiveImage(post);
+  }
+  function addSlide(p) {
+    openPicker((ref) => {
+      if (isCustom(p)) {
+        if (!Array.isArray(p.slides)) p.slides = [];
+        p.slides.push({ image: ref, label: 'Slide ' + (p.slides.length + 1) });
+        saveCustom();
+      } else {
+        if (!state.overrides[p.id]) state.overrides[p.id] = {};
+        if (!state.overrides[p.id].addedSlides) state.overrides[p.id].addedSlides = [];
+        state.overrides[p.id].addedSlides.push(ref);
+        saveOverrides();
+      }
+      openModal(p); renderGrid();
+    });
+  }
+  function removeAddedSlide(p, j) {
+    const arr = state.overrides[p.id]?.addedSlides;
+    if (arr) { arr.splice(j, 1); saveOverrides(); openModal(p); renderGrid(); }
   }
 
   /* Fetch image listings from http.server */
@@ -364,7 +391,7 @@
     if (p.day) left.appendChild(badge('day', dayLabel(p.day)));
     t.appendChild(left);
     const right = el('div', 'tile-badge-right');
-    if (isCarousel && p.slides?.length) right.appendChild(badge('carousel-ind', '⊞ ' + p.slides.length));
+    if (isCarousel && slideCount(p)) right.appendChild(badge('carousel-ind', '⊞ ' + slideCount(p)));
     right.appendChild(badge('format-' + p.format, fmtShort(p.format)));
     const st = getStatus(p.id);
     if (st !== 'draft') right.appendChild(badge('status-' + st, stShort(st)));
@@ -451,7 +478,7 @@
     const meta = el('div', 'meta-line');
     if (p.day) meta.appendChild(badge('day', dayLabel(p.day)));
     meta.appendChild(badge('format-' + p.format, fmtShort(p.format)));
-    if (p.format === 'carousel') meta.appendChild(badge('carousel-ind', '⊞ ' + (p.slides?.length || 0)));
+    if (p.format === 'carousel') meta.appendChild(badge('carousel-ind', '⊞ ' + slideCount(p)));
     const pillarBadge = badge('', state.data.pillars[p.pillar]?.label || p.pillar);
     pillarBadge.style.background = state.data.pillars[p.pillar]?.color || '#888';
     pillarBadge.style.color = 'white';
@@ -524,10 +551,10 @@
 
     // Download (high-res, for posting to Instagram)
     if (getThumbnail(p)) {
+      const refs = postMediaRefs(p);
       const dlSec = el('div', 'modal-section');
-      const nMedia = p.slides ? p.slides.filter((s, i) => getEffectiveSlideImage(p, i)).length : 1;
       const dlBtns = el('div', 'btn-row');
-      dlBtns.appendChild(mkBtn(nMedia > 1 ? `⤓ Download all (${nMedia})` : '⤓ Download image', () => downloadPostMedia(p)));
+      dlBtns.appendChild(mkBtn(refs.length > 1 ? `⤓ Download all (${refs.length})` : '⤓ Download image', () => downloadPostMedia(p)));
       dlSec.appendChild(dlBtns);
       c.appendChild(dlSec);
     }
@@ -638,57 +665,74 @@
     }
   }
 
+  function slideSlot(p, num, label, img, actionsBuilder) {
+    const slot = el('div', 'slide-slot');
+    const head = el('div', 'slide-head');
+    head.appendChild(el('span', 'slide-num', String(num)));
+    head.appendChild(el('span', 'slide-label', label));
+    slot.appendChild(head);
+    const inner = el('div', 'slide-inner');
+    if (img) {
+      const path = mediaPath(img);
+      if (isVideoFile(img)) { const v = document.createElement('video'); v.src = path; v.muted = true; v.controls = true; v.preload = 'metadata'; inner.appendChild(v); }
+      else { const i = document.createElement('img'); i.src = path; i.alt = label || ''; inner.appendChild(i); }
+    } else {
+      inner.appendChild(el('div', 'slide-placeholder', label));
+    }
+    slot.appendChild(inner);
+    const actions = el('div', 'slide-actions');
+    if (img) {
+      const dl = el('button', 'swap-btn-sm', '⤓ Download');
+      dl.onclick = (e) => {
+        e.stopPropagation();
+        const name = String(img).startsWith('data:') ? (slugify(p.title) || 'post') + '-' + num + '.jpg' : String(img).split('/').pop();
+        downloadMedia(img, name);
+      };
+      actions.appendChild(dl);
+    }
+    if (actionsBuilder) actionsBuilder(actions);
+    slot.appendChild(actions);
+    return slot;
+  }
+
   function renderCarouselSlides(wrap, p) {
     wrap.classList.add('carousel-stack');
-    p.slides.forEach((slide, idx) => {
-      const slot = el('div', 'slide-slot');
+    const base = p.slides || [];
+    base.forEach((slide, idx) => {
       const img = getEffectiveSlideImage(p, idx);
-      const head = el('div', 'slide-head');
-      head.appendChild(el('span', 'slide-num', String(idx + 1)));
-      head.appendChild(el('span', 'slide-label', slide.label || ('Slide ' + (idx + 1))));
-      slot.appendChild(head);
-      const inner = el('div', 'slide-inner');
-      if (img) {
-        const path = mediaPath(img);
-        if (isVideoFile(img)) {
-          const v = document.createElement('video'); v.src = path; v.muted = true; v.controls = true; v.preload = 'metadata';
-          inner.appendChild(v);
-        } else {
-          const i = document.createElement('img'); i.src = path; i.alt = slide.label || '';
-          inner.appendChild(i);
+      const slot = slideSlot(p, idx + 1, slide.label || ('Slide ' + (idx + 1)), img, (actions) => {
+        const swap = el('button', 'swap-btn-sm', img ? 'Change' : 'Pick image');
+        swap.onclick = (e) => { e.stopPropagation(); openPicker((file) => { setSlideOverride(p.id, idx, file); openModal(p); renderGrid(); }); };
+        actions.appendChild(swap);
+        if (state.overrides[p.id]?.slides?.[idx]) {
+          const reset = el('button', 'reset-btn-sm', 'Reset');
+          reset.onclick = (e) => { e.stopPropagation(); clearOverride(p.id, idx); openModal(p); renderGrid(); };
+          actions.appendChild(reset);
         }
-      } else {
-        const ph = el('div', 'slide-placeholder');
-        if (slide.isProductShotSlot) {
-          ph.innerHTML = '<div class="ps-lab">Add product shot</div><div class="ps-name">' + (slide.suggestedFile || '') + '</div>';
-          if (slide.note) ph.innerHTML += '<div class="ps-note">' + slide.note + '</div>';
-        } else {
-          ph.textContent = slide.label || ('Slide ' + (idx + 1));
+        if (isCustom(p) && base.length > 1) {
+          const rm = el('button', 'reset-btn-sm', 'Remove');
+          rm.onclick = (e) => { e.stopPropagation(); p.slides.splice(idx, 1); saveCustom(); openModal(p); renderGrid(); };
+          actions.appendChild(rm);
         }
-        inner.appendChild(ph);
-      }
-      slot.appendChild(inner);
-      const actions = el('div', 'slide-actions');
-      const swap = el('button', 'swap-btn-sm', img ? 'Change' : 'Pick image');
-      swap.onclick = (e) => { e.stopPropagation(); openPicker((file) => { setSlideOverride(p.id, idx, file); openModal(p); renderGrid(); }); };
-      actions.appendChild(swap);
-      if (img) {
-        const dl = el('button', 'swap-btn-sm', '⤓ Download');
-        dl.onclick = (e) => {
-          e.stopPropagation();
-          const name = String(img).startsWith('data:') ? (slugify(p.title) || 'post') + '-' + (idx + 1) + '.jpg' : String(img).split('/').pop();
-          downloadMedia(img, name);
-        };
-        actions.appendChild(dl);
-      }
-      if (state.overrides[p.id]?.slides?.[idx]) {
-        const reset = el('button', 'reset-btn-sm', 'Reset');
-        reset.onclick = (e) => { e.stopPropagation(); clearOverride(p.id, idx); openModal(p); renderGrid(); };
-        actions.appendChild(reset);
-      }
-      slot.appendChild(actions);
+      });
       wrap.appendChild(slot);
     });
+    // Extra slides the user appended to a plan post (stored as overrides.addedSlides)
+    addedSlides(p).forEach((ref, j) => {
+      const slot = slideSlot(p, base.length + j + 1, 'Added photo', ref, (actions) => {
+        const swap = el('button', 'swap-btn-sm', 'Change');
+        swap.onclick = (e) => { e.stopPropagation(); openPicker((file) => { state.overrides[p.id].addedSlides[j] = file; saveOverrides(); openModal(p); renderGrid(); }); };
+        actions.appendChild(swap);
+        const rm = el('button', 'reset-btn-sm', 'Remove');
+        rm.onclick = (e) => { e.stopPropagation(); removeAddedSlide(p, j); };
+        actions.appendChild(rm);
+      });
+      wrap.appendChild(slot);
+    });
+    // Add photo
+    const addBtn = el('button', 'slide-add-btn', '+ Add photo');
+    addBtn.onclick = (e) => { e.stopPropagation(); addSlide(p); };
+    wrap.appendChild(addBtn);
   }
 
   function elInner(tag, cls, html) { const e = el(tag, cls); e.innerHTML = html; return e; }
@@ -749,6 +793,21 @@
     pk.classList.add('open');
     const body = $('#pickerBody');
     body.innerHTML = '';
+
+    // Upload a new photo (returns to whatever opened the picker: slide change, + Add photo, editor…)
+    const upRow = el('div', 'picker-upload');
+    const upLabel = el('label', 'btn', '⤒ Upload new photo');
+    const upInput = Object.assign(document.createElement('input'), { type: 'file', accept: 'image/*' });
+    upInput.style.display = 'none';
+    upInput.onchange = () => {
+      const f = upInput.files[0]; if (!f) return;
+      fileToDataURL(f, 1600, (durl) => { const cb = state.pickerCallback; closePicker(); if (cb) try { cb(durl); } catch (err) { console.error(err); } });
+      upInput.value = '';
+    };
+    upLabel.appendChild(upInput);
+    upRow.appendChild(upLabel);
+    upRow.appendChild(el('span', 'picker-upload-hint', 'or choose an existing file below'));
+    body.appendChild(upRow);
 
     // Search
     const search = el('input', 'picker-search');

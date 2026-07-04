@@ -237,3 +237,9 @@ main { max-width: 1100px; margin: 0 auto; padding: 16px 24px 80px; }
 .tile:hover .tile-dl { opacity: 1; }
 .tile-dl:hover { background: rgba(26,18,10,0.85); }
 @media (hover: none) { .tile-dl { opacity: 1; } }
+
+/* ---------- ADD CAROUSEL PHOTO ---------- */
+.slide-add-btn { width: 100%; padding: 14px; border: 1.5px dashed var(--line); border-radius: 10px; background: rgba(255,255,255,0.5); color: var(--warm-deep); font-weight: 600; font-size: 13px; cursor: pointer; transition: border-color .12s, background .12s; }
+.slide-add-btn:hover { border-color: var(--warm); background: #fff; }
+.picker-upload { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+.picker-upload-hint { font-size: 12px; color: var(--ink-mute); }
