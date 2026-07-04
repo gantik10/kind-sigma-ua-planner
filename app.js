@@ -3,6 +3,7 @@
   const OVERRIDE_KEY = 'ks-ua-planner-overrides-v3';
   const CUSTOM_KEY = 'ks-ua-custom-posts-v1';
   const ORDER_KEY = 'ks-ua-order-v1';
+  const NOTES_KEY = 'ks-ua-notes-v1';
   const FORMATS = [
     { id: 'static',        label: 'Static' },
     { id: 'carousel',      label: 'Carousel' },
@@ -24,16 +25,49 @@
     overrides: loadOverrides(),
     customPosts: loadCustom(),
     order: loadOrder(),
+    notes: loadNotes(),
     dragId: null,
     justDragged: 0,
     pickerOpen: false,
     pickerCallback: null,
   };
 
+  /* ---- Notes for Ahmed (per post), persisted in LocalStorage ---- */
+  function loadNotes() { try { return JSON.parse(localStorage.getItem(NOTES_KEY) || '{}'); } catch { return {}; } }
+  function saveNotes() { try { localStorage.setItem(NOTES_KEY, JSON.stringify(state.notes)); } catch {} }
+  function getNote(id) { return state.notes[id] || ''; }
+  function setNote(id, txt) {
+    txt = (txt || '').trim();
+    if (txt) state.notes[id] = txt; else delete state.notes[id];
+    saveNotes();
+  }
+
+  /* ---- 1-click high-res download (for posting to Instagram) ---- */
+  function slugify(s) { return (s || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''); }
+  function downloadMedia(ref, filename) {
+    if (!ref) return;
+    const a = document.createElement('a');
+    a.href = mediaPath(ref);
+    a.download = filename || (String(ref).startsWith('data:') ? 'kindsigma.jpg' : String(ref).split('/').pop());
+    document.body.appendChild(a); a.click(); a.remove();
+  }
+  // Download every image of a post (original resolution). Carousel slides are staggered.
+  function downloadPostMedia(p) {
+    let refs;
+    if (p.slides) refs = p.slides.map((s, i) => getEffectiveSlideImage(p, i)).filter(Boolean);
+    else { const t = getThumbnail(p); refs = t ? [t] : []; }
+    refs.forEach((ref, i) => {
+      const name = String(ref).startsWith('data:')
+        ? (slugify(p.title) || 'post') + (refs.length > 1 ? '-' + (i + 1) : '') + '.jpg'
+        : String(ref).split('/').pop();
+      setTimeout(() => downloadMedia(ref, name), i * 350);
+    });
+  }
+
   function loadCustom() { try { return JSON.parse(localStorage.getItem(CUSTOM_KEY) || '[]'); } catch { return []; } }
   function saveCustom() {
     try { localStorage.setItem(CUSTOM_KEY, JSON.stringify(state.customPosts)); return true; }
-    catch (e) { alert('Не вдалося зберегти: сховище браузера переповнене. Спробуйте менші/легші зображення або видаліть кілька власних постів.'); return false; }
+    catch (e) { alert('Could not save: browser storage is full. Try smaller/lighter images or delete a few of your own posts.'); return false; }
   }
   // All posts = plan posts (from posts.json) + user-created posts (from LocalStorage)
   function allPosts() { return state.data.posts.concat(state.customPosts); }
@@ -142,7 +176,7 @@
   state.images.main = await scanDir('images/');
   state.images.productShots = await scanDir('images/product-shots/');
 
-  const r = await fetch('posts.json?v=13');
+  const r = await fetch('posts.json?v=14');
   state.data = await r.json();
   for (const p of state.data.posts) {
     p.isVideo = !!(p.image && /\.(mp4|mov|webm)$/i.test(p.image));
@@ -188,7 +222,7 @@
       tabs.appendChild(mkTab(ph.id, ph.label, count));
     });
     if (state.customPosts.length) {
-      tabs.appendChild(mkTab('custom', 'Мої пости', state.customPosts.length));
+      tabs.appendChild(mkTab('custom', 'My posts', state.customPosts.length));
     }
   }
   function mkTab(id, label, count) {
@@ -334,10 +368,15 @@
     right.appendChild(badge('format-' + p.format, fmtShort(p.format)));
     const st = getStatus(p.id);
     if (st !== 'draft') right.appendChild(badge('status-' + st, stShort(st)));
+    if (getNote(p.id)) right.appendChild(badge('note', '✎'));
     t.appendChild(right);
     if (thumb) {
       const bot = el('div', 'tile-bottom', p.title);
       t.appendChild(bot);
+      const dl = el('button', 'tile-dl', '⤓');
+      dl.title = 'Download high-res';
+      dl.onclick = (e) => { e.stopPropagation(); downloadPostMedia(p); };
+      t.appendChild(dl);
     }
     makeDraggable(t, p);
     return t;
@@ -424,6 +463,7 @@
     }
     const st = getStatus(p.id);
     if (st !== 'draft') meta.appendChild(badge('status-' + st, stLabel(st)));
+    if (getNote(p.id)) meta.appendChild(badge('note', '✎ Ahmed'));
     info.appendChild(meta);
     info.appendChild(el('h3', '', p.title));
     info.appendChild(el('div', 'caption-preview', (p.caption || '').replace(/\n/g, ' ')));
@@ -482,6 +522,16 @@
     }
     c.appendChild(mb);
 
+    // Download (high-res, for posting to Instagram)
+    if (getThumbnail(p)) {
+      const dlSec = el('div', 'modal-section');
+      const nMedia = p.slides ? p.slides.filter((s, i) => getEffectiveSlideImage(p, i)).length : 1;
+      const dlBtns = el('div', 'btn-row');
+      dlBtns.appendChild(mkBtn(nMedia > 1 ? `⤓ Download all (${nMedia})` : '⤓ Download image', () => downloadPostMedia(p)));
+      dlSec.appendChild(dlBtns);
+      c.appendChild(dlSec);
+    }
+
     // Status picker
     const sSec = el('div', 'modal-section');
     sSec.appendChild(elInner('h4', '', 'Status'));
@@ -494,6 +544,19 @@
     });
     sSec.appendChild(picker);
     c.appendChild(sSec);
+
+    // Note for Ahmed
+    const nSec = el('div', 'modal-section');
+    nSec.appendChild(elInner('h4', '', 'Note for Ahmed'));
+    const noteInput = el('textarea', 'note-input');
+    noteInput.value = getNote(p.id);
+    noteInput.placeholder = 'Leave a note for Ahmed…';
+    nSec.appendChild(noteInput);
+    const nBtns = el('div', 'btn-row');
+    nBtns.appendChild(mkBtn('Save note', () => { setNote(p.id, noteInput.value); renderGrid(); toast('Note saved'); }));
+    if (getNote(p.id)) nBtns.appendChild(mkBtn('Clear', () => { setNote(p.id, ''); openModal(p); renderGrid(); }, true));
+    nSec.appendChild(nBtns);
+    c.appendChild(nSec);
 
     // Production brief
     if (p.productionRequired && p.productionBrief) {
@@ -534,9 +597,9 @@
     if (isCustom(p)) {
       const sec = el('div', 'modal-section');
       const row = el('div', 'btn-row');
-      row.appendChild(mkBtn('Редагувати', () => { closeModal(); openEditor(p); }));
-      const del = mkBtn('Видалити', () => {
-        if (confirm('Видалити цей пост?')) {
+      row.appendChild(mkBtn('Edit', () => { closeModal(); openEditor(p); }));
+      const del = mkBtn('Delete', () => {
+        if (confirm('Delete this post?')) {
           state.customPosts = state.customPosts.filter(x => x.id !== p.id);
           if (!state.customPosts.length && state.activeTab === 'custom') state.activeTab = 'all';
           saveCustom(); ensureOrder(); saveOrder(); closeModal(); renderTabs(); renderAll();
@@ -609,6 +672,15 @@
       const swap = el('button', 'swap-btn-sm', img ? 'Change' : 'Pick image');
       swap.onclick = (e) => { e.stopPropagation(); openPicker((file) => { setSlideOverride(p.id, idx, file); openModal(p); renderGrid(); }); };
       actions.appendChild(swap);
+      if (img) {
+        const dl = el('button', 'swap-btn-sm', '⤓ Download');
+        dl.onclick = (e) => {
+          e.stopPropagation();
+          const name = String(img).startsWith('data:') ? (slugify(p.title) || 'post') + '-' + (idx + 1) + '.jpg' : String(img).split('/').pop();
+          downloadMedia(img, name);
+        };
+        actions.appendChild(dl);
+      }
       if (state.overrides[p.id]?.slides?.[idx]) {
         const reset = el('button', 'reset-btn-sm', 'Reset');
         reset.onclick = (e) => { e.stopPropagation(); clearOverride(p.id, idx); openModal(p); renderGrid(); };
@@ -625,14 +697,13 @@
     b.onclick = onClick;
     return b;
   }
-  function copyText(t) {
-    navigator.clipboard.writeText(t).then(() => {
-      const toast = el('div', '', 'Copied');
-      toast.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1a1a1a;color:white;padding:10px 18px;border-radius:8px;font-size:13px;z-index:300;box-shadow:0 4px 16px rgba(0,0,0,.2)';
-      document.body.appendChild(toast);
-      setTimeout(() => toast.remove(), 1200);
-    });
+  function toast(msg) {
+    const t = el('div', '', msg);
+    t.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1a1a1a;color:white;padding:10px 18px;border-radius:8px;font-size:13px;z-index:300;box-shadow:0 4px 16px rgba(0,0,0,.2)';
+    document.body.appendChild(t);
+    setTimeout(() => t.remove(), 1200);
   }
+  function copyText(t) { navigator.clipboard.writeText(t).then(() => toast('Copied')); }
 
   function bindModal() {
     $('#modalClose').onclick = (e) => { e.stopPropagation(); closeModal(); };
@@ -767,7 +838,7 @@
       : [];
 
     const body = $('#editorBody'); body.innerHTML = '';
-    body.appendChild(el('h2', 'editor-title', editing ? 'Редагувати пост' : 'Новий пост'));
+    body.appendChild(el('h2', 'editor-title', editing ? 'Edit post' : 'New post'));
 
     function field(labelText, node) {
       const f = el('div', 'ed-field');
@@ -775,34 +846,34 @@
       f.appendChild(node);
       return f;
     }
-    const titleIn = Object.assign(el('input', 'ed-input'), { value: editing ? (existing.title || '') : '', placeholder: 'Напр. HALIA — вечірній образ' });
-    const dayIn = Object.assign(el('input', 'ed-input'), { value: editing ? (existing.day || '') : '', placeholder: 'Дата, напр. 12 сер' });
+    const titleIn = Object.assign(el('input', 'ed-input'), { value: editing ? (existing.title || '') : '', placeholder: 'e.g. HALIA — evening look' });
+    const dayIn = Object.assign(el('input', 'ed-input'), { value: editing ? (existing.day || '') : '', placeholder: 'Date, e.g. 12 Aug' });
 
     const fmtSel = el('select', 'ed-input');
-    [['static', 'Static (1 фото)'], ['carousel', 'Carousel (кілька фото)'], ['reel', 'Reel (відео)']].forEach(([v, l]) => {
+    [['static', 'Static (1 photo)'], ['carousel', 'Carousel (multiple photos)'], ['reel', 'Reel (video)']].forEach(([v, l]) => {
       const o = el('option', '', l); o.value = v; if (editing && existing.format === v) o.selected = true; fmtSel.appendChild(o);
     });
     const pillarSel = el('select', 'ed-input');
     Object.entries(state.data.pillars).forEach(([id, info]) => {
       const o = el('option', '', info.label); o.value = id; if (editing && existing.pillar === id) o.selected = true; pillarSel.appendChild(o);
     });
-    const capIn = Object.assign(el('textarea', 'ed-input ed-textarea'), { value: editing ? (existing.caption || '') : '', placeholder: 'Текст підпису…' });
+    const capIn = Object.assign(el('textarea', 'ed-input ed-textarea'), { value: editing ? (existing.caption || '') : '', placeholder: 'Caption text…' });
     const hashIn = Object.assign(el('input', 'ed-input'), { value: editing && existing.hashtags ? existing.hashtags.join(' ') : '', placeholder: '#kindsigma #kindsigmaua' });
 
-    body.appendChild(field('Заголовок', titleIn));
+    body.appendChild(field('Title', titleIn));
     const rowMeta = el('div', 'ed-row');
-    rowMeta.appendChild(field('Дата', dayIn));
-    rowMeta.appendChild(field('Формат', fmtSel));
-    rowMeta.appendChild(field('Пілар', pillarSel));
+    rowMeta.appendChild(field('Date', dayIn));
+    rowMeta.appendChild(field('Format', fmtSel));
+    rowMeta.appendChild(field('Pillar', pillarSel));
     body.appendChild(rowMeta);
 
     // Images
     const imgField = el('div', 'ed-field');
-    imgField.appendChild(el('label', 'ed-label', 'Зображення'));
+    imgField.appendChild(el('label', 'ed-label', 'Images'));
     const preview = el('div', 'ed-previews');
     function renderPreviews() {
       preview.innerHTML = '';
-      if (!imgs.length) { preview.appendChild(el('div', 'ed-empty', 'Ще немає зображень')); }
+      if (!imgs.length) { preview.appendChild(el('div', 'ed-empty', 'No images yet')); }
       imgs.forEach((ref, i) => {
         const cell = el('div', 'ed-thumb');
         if (isVideoFile(ref)) {
@@ -820,7 +891,7 @@
     imgField.appendChild(preview);
 
     const upWrap = el('div', 'btn-row');
-    const fileLabel = el('label', 'btn', 'Завантажити фото');
+    const fileLabel = el('label', 'btn', 'Upload photo');
     const fileIn = Object.assign(document.createElement('input'), { type: 'file', accept: 'image/*', multiple: true });
     fileIn.style.display = 'none';
     fileIn.onchange = () => {
@@ -831,31 +902,31 @@
     };
     fileLabel.appendChild(fileIn);
     upWrap.appendChild(fileLabel);
-    const pickBtn = mkBtn('Вибрати з наявних', () => {
+    const pickBtn = mkBtn('Choose existing', () => {
       openEditorPicker((file) => { imgs.push(file); renderPreviews(); });
     }, true);
     upWrap.appendChild(pickBtn);
     imgField.appendChild(upWrap);
-    imgField.appendChild(el('div', 'ed-hint', 'Static/Reel беруть 1‑ше зображення. Carousel — усі. Відео додавайте через «Вибрати з наявних».'));
+    imgField.appendChild(el('div', 'ed-hint', 'Static/Reel use the 1st image. Carousel uses all. Add videos via "Choose existing".'));
     body.appendChild(imgField);
 
-    body.appendChild(field('Підпис', capIn));
-    body.appendChild(field('Хештеги', hashIn));
+    body.appendChild(field('Caption', capIn));
+    body.appendChild(field('Hashtags', hashIn));
 
     const actions = el('div', 'ed-actions');
-    const save = mkBtn(editing ? 'Зберегти зміни' : 'Створити пост', () => {
+    const save = mkBtn(editing ? 'Save changes' : 'Create post', () => {
       const fmt = fmtSel.value;
       const post = {
         id: editing ? existing.id : 'custom-' + Date.now(),
         order: editing ? existing.order : Date.now(),
         phase: 'custom', pillar: pillarSel.value,
         day: dayIn.value.trim(), format: fmt,
-        title: titleIn.value.trim() || 'Без назви',
+        title: titleIn.value.trim() || 'Untitled',
         productionRequired: false,
         caption: capIn.value, hashtags: parseHashtags(hashIn.value),
         custom: true,
       };
-      if (fmt === 'carousel') post.slides = imgs.map((im, i) => ({ image: im, label: 'Слайд ' + (i + 1) }));
+      if (fmt === 'carousel') post.slides = imgs.map((im, i) => ({ image: im, label: 'Slide ' + (i + 1) }));
       else post.image = imgs[0] || null;
 
       if (editing) {
@@ -867,7 +938,7 @@
       if (saveCustom()) { ensureOrder(); saveOrder(); closeEditor(); renderTabs(); renderAll(); openModal(post); }
     });
     actions.appendChild(save);
-    actions.appendChild(mkBtn('Скасувати', closeEditor, true));
+    actions.appendChild(mkBtn('Cancel', closeEditor, true));
     body.appendChild(actions);
 
     $('#editor').classList.add('open');

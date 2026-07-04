@@ -5,24 +5,24 @@
     "currency": "UAH",
     "basePrice": 5900,
     "generatedAt": "2026-07-06",
-    "version": "v8",
+    "version": "v9",
     "voice": "Minimal / editorial Ukrainian. Short, mood-first. Ends only with kindsigma.com.",
-    "note": "23 пости. Дроп — сітка 3×3 у теплій нейтральній гамі (крем/коричневий/чорний). Синя яхта, ч/б сцена, срібло та вечірки винесені у ролаут для контрасту. Ч/б виступ обʼєднано в одну карусель."
+    "note": "23 posts from existing media. Interface in English; captions in Ukrainian. Drop = 3x3 warm grid; B&W stage merged into one carousel."
   },
   "phases": [
     {
       "id": "drop",
-      "label": "Дроп · 6 липня (сітка 3×3)",
+      "label": "Drop · 6 Jul (3×3 grid)",
       "color": "#1a1a1a"
     },
     {
       "id": "wave-1",
-      "label": "Липень",
+      "label": "July",
       "color": "#5E4F3D"
     },
     {
       "id": "wave-2",
-      "label": "Серпень",
+      "label": "August",
       "color": "#9B8B7A"
     }
   ],
@@ -57,7 +57,7 @@
       "id": "p1",
       "order": 1,
       "phase": "drop",
-      "day": "Дроп · 6 лип",
+      "day": "Drop · 6 Jul",
       "format": "carousel",
       "pillar": "brand",
       "title": "GENESIS",
@@ -73,7 +73,7 @@
       "slides": [
         {
           "image": "genesis-frame-scan.jpg",
-          "label": "Дужка з гравіюванням"
+          "label": "Engraved temple"
         },
         {
           "image": "genesis-red-text.jpg",
@@ -85,7 +85,7 @@
       "id": "p2",
       "order": 2,
       "phase": "drop",
-      "day": "Дроп · 6 лип",
+      "day": "Drop · 6 Jul",
       "format": "static",
       "pillar": "product",
       "title": "HALIA",
@@ -104,7 +104,7 @@
       "id": "p3",
       "order": 3,
       "phase": "drop",
-      "day": "Дроп · 6 лип",
+      "day": "Drop · 6 Jul",
       "format": "static",
       "pillar": "product",
       "title": "HALIA — in-room dining",
@@ -122,7 +122,7 @@
       "id": "p4",
       "order": 4,
       "phase": "drop",
-      "day": "Дроп · 6 лип",
+      "day": "Drop · 6 Jul",
       "format": "static",
       "pillar": "product",
       "title": "HALIA — editorial",
@@ -140,7 +140,7 @@
       "id": "p5",
       "order": 5,
       "phase": "drop",
-      "day": "Дроп · 6 лип",
+      "day": "Drop · 6 Jul",
       "format": "carousel",
       "pillar": "lifestyle",
       "title": "THE DAILY ROUTINE SERIES",
@@ -155,19 +155,19 @@
       "slides": [
         {
           "image": "daily-routine-espresso-1.jpg",
-          "label": "Еспресо"
+          "label": "Espresso"
         },
         {
           "image": "daily-routine-espresso-2.jpg",
-          "label": "Яйце некруто"
+          "label": "Soft-boiled egg"
         },
         {
           "image": "daily-routine-morning-1.jpg",
-          "label": "Ранок"
+          "label": "Morning"
         },
         {
           "image": "daily-routine-morning-2.jpg",
-          "label": "Деталі"
+          "label": "Details"
         }
       ]
     },
@@ -175,10 +175,10 @@
       "id": "p6",
       "order": 6,
       "phase": "drop",
-      "day": "Дроп · 6 лип",
+      "day": "Drop · 6 Jul",
       "format": "static",
       "pillar": "trend",
-      "title": "Вулиця",
+      "title": "Street",
       "productionRequired": false,
       "caption": "Місто прокидається. Тонка оправа вже на місці.\n\nkindsigma.com",
       "hashtags": [
@@ -193,10 +193,10 @@
       "id": "p7",
       "order": 7,
       "phase": "drop",
-      "day": "Дроп · 6 лип",
+      "day": "Drop · 6 Jul",
       "format": "carousel",
       "pillar": "lifestyle",
-      "title": "Повільний день",
+      "title": "Slow afternoon",
       "productionRequired": false,
       "caption": "Повільний день. Кава і бурштинові лінзи.\n\nkindsigma.com",
       "hashtags": [
@@ -208,11 +208,11 @@
       "slides": [
         {
           "image": "dubai-streetstyle-1.jpg",
-          "label": "Кадр 1"
+          "label": "Frame 1"
         },
         {
           "image": "dubai-streetstyle-3.jpg",
-          "label": "Кадр 2"
+          "label": "Frame 2"
         }
       ]
     },
@@ -220,7 +220,7 @@
       "id": "p8",
       "order": 8,
       "phase": "drop",
-      "day": "Дроп · 6 лип",
+      "day": "Drop · 6 Jul",
       "format": "static",
       "pillar": "character",
       "title": "Brooklyn",
@@ -238,7 +238,7 @@
       "id": "p9",
       "order": 9,
       "phase": "drop",
-      "day": "Дроп · 6 лип",
+      "day": "Drop · 6 Jul",
       "format": "static",
       "pillar": "product",
       "title": "HALIA — editorial",
@@ -256,7 +256,7 @@
       "id": "p10",
       "order": 10,
       "phase": "wave-1",
-      "day": "9 лип",
+      "day": "9 Jul",
       "format": "reel",
       "pillar": "product",
       "title": "Reel",
@@ -274,10 +274,10 @@
       "id": "p11",
       "order": 11,
       "phase": "wave-1",
-      "day": "12 лип",
+      "day": "12 Jul",
       "format": "static",
       "pillar": "lifestyle",
-      "title": "Золота година · I",
+      "title": "Golden hour · I",
       "productionRequired": false,
       "caption": "Літо на воді, темні лінзи проти сонця.\n\nkindsigma.com",
       "hashtags": [
@@ -292,10 +292,10 @@
       "id": "p12",
       "order": 12,
       "phase": "wave-1",
-      "day": "14 лип",
+      "day": "14 Jul",
       "format": "static",
       "pillar": "trend",
-      "title": "Вулиця · II",
+      "title": "Street · II",
       "productionRequired": false,
       "caption": "Спокій і структура.\n\nkindsigma.com",
       "hashtags": [
@@ -310,10 +310,10 @@
       "id": "p13",
       "order": 13,
       "phase": "wave-1",
-      "day": "17 лип",
+      "day": "17 Jul",
       "format": "carousel",
       "pillar": "community",
-      "title": "На сцені",
+      "title": "On stage",
       "productionRequired": false,
       "caption": "На сцені.\nСвітло гасне — оправа лишається.\n\nkindsigma.com",
       "hashtags": [
@@ -325,15 +325,15 @@
       "slides": [
         {
           "image": "xp24-1.jpg",
-          "label": "Кадр 1"
+          "label": "Frame 1"
         },
         {
           "image": "xp24-2.jpg",
-          "label": "Кадр 2"
+          "label": "Frame 2"
         },
         {
           "image": "xp24-3.jpg",
-          "label": "Кадр 3"
+          "label": "Frame 3"
         }
       ]
     },
@@ -341,10 +341,10 @@
       "id": "p14",
       "order": 14,
       "phase": "wave-1",
-      "day": "19 лип",
+      "day": "19 Jul",
       "format": "static",
       "pillar": "community",
-      "title": "Вечір · I",
+      "title": "Night out · I",
       "productionRequired": false,
       "caption": "Вечір тільки починається.\n\nkindsigma.com",
       "hashtags": [
@@ -359,10 +359,10 @@
       "id": "p15",
       "order": 15,
       "phase": "wave-1",
-      "day": "22 лип",
+      "day": "22 Jul",
       "format": "carousel",
       "pillar": "trend",
-      "title": "Срібло",
+      "title": "Silver",
       "productionRequired": false,
       "caption": "Срібло і чорне мереживо.\nОправа як фінальний штрих.\n\nkindsigma.com",
       "hashtags": [
@@ -374,11 +374,11 @@
       "slides": [
         {
           "image": "fltrd-1.jpg",
-          "label": "Кадр 1"
+          "label": "Frame 1"
         },
         {
           "image": "fltrd-2.jpg",
-          "label": "Кадр 2"
+          "label": "Frame 2"
         }
       ]
     },
@@ -386,10 +386,10 @@
       "id": "p16",
       "order": 16,
       "phase": "wave-1",
-      "day": "24 лип",
+      "day": "24 Jul",
       "format": "static",
       "pillar": "trend",
-      "title": "Вулиця · III",
+      "title": "Street · III",
       "productionRequired": false,
       "caption": "Oversize і впевнений крок.\n\nkindsigma.com",
       "hashtags": [
@@ -404,10 +404,10 @@
       "id": "p17",
       "order": 17,
       "phase": "wave-1",
-      "day": "27 лип",
+      "day": "27 Jul",
       "format": "static",
       "pillar": "lifestyle",
-      "title": "Золота година · II",
+      "title": "Golden hour · II",
       "productionRequired": false,
       "caption": "Сонце на шкірі, музика поруч.\n\nkindsigma.com",
       "hashtags": [
@@ -422,7 +422,7 @@
       "id": "p18",
       "order": 18,
       "phase": "wave-1",
-      "day": "29 лип",
+      "day": "29 Jul",
       "format": "reel",
       "pillar": "lifestyle",
       "title": "Reel",
@@ -440,10 +440,10 @@
       "id": "p19",
       "order": 19,
       "phase": "wave-2",
-      "day": "1 сер",
+      "day": "1 Aug",
       "format": "static",
       "pillar": "community",
-      "title": "Вечір · II",
+      "title": "Night out · II",
       "productionRequired": false,
       "caption": "Конфеті і свої люди.\n\nkindsigma.com",
       "hashtags": [
@@ -458,10 +458,10 @@
       "id": "p20",
       "order": 20,
       "phase": "wave-2",
-      "day": "3 сер",
+      "day": "3 Aug",
       "format": "static",
       "pillar": "trend",
-      "title": "Вулиця · IV",
+      "title": "Street · IV",
       "productionRequired": false,
       "caption": "Профіль. І гравіювання на дужці.\n\nkindsigma.com",
       "hashtags": [
@@ -476,10 +476,10 @@
       "id": "p21",
       "order": 21,
       "phase": "wave-2",
-      "day": "6 сер",
+      "day": "6 Aug",
       "format": "static",
       "pillar": "lifestyle",
-      "title": "Золота година · III",
+      "title": "Golden hour · III",
       "productionRequired": false,
       "caption": "Місто на горизонті. Захід сонця.\n\nkindsigma.com",
       "hashtags": [
@@ -494,7 +494,7 @@
       "id": "p22",
       "order": 22,
       "phase": "wave-2",
-      "day": "8 сер",
+      "day": "8 Aug",
       "format": "reel",
       "pillar": "brand",
       "title": "Reel — BTS",
@@ -513,10 +513,10 @@
       "id": "p23",
       "order": 23,
       "phase": "wave-2",
-      "day": "11 сер",
+      "day": "11 Aug",
       "format": "static",
       "pillar": "community",
-      "title": "Вечір · III",
+      "title": "Night out · III",
       "productionRequired": false,
       "caption": "Дякуємо всім, хто був поруч.\n\nkindsigma.com",
       "hashtags": [
