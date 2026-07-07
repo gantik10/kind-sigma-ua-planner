@@ -226,7 +226,7 @@
   state.images.main = await scanDir('images/');
   state.images.productShots = await scanDir('images/product-shots/');
 
-  const r = await fetch('posts.json?v=14');
+  const r = await fetch('posts.json?v=17');
   state.data = await r.json();
   for (const p of state.data.posts) {
     p.isVideo = !!(p.image && /\.(mp4|mov|webm)$/i.test(p.image));

@@ -5,7 +5,7 @@
     "currency": "UAH",
     "basePrice": 5900,
     "generatedAt": "2026-07-06",
-    "version": "v9",
+    "version": "v10",
     "voice": "Minimal / editorial Ukrainian. Short, mood-first. Ends only with kindsigma.com.",
     "note": "23 posts from existing media. Interface in English; captions in Ukrainian. Drop = 3x3 warm grid; B&W stage merged into one carousel."
   },
@@ -62,13 +62,16 @@
       "pillar": "brand",
       "title": "GENESIS",
       "productionRequired": false,
-      "caption": "GENESIS.\nХарактер у чистій геометрії — чорний, синій, червоний.\n\nkindsigma.com",
+      "caption": "KIND SIGMA — тепер в Україні.\n\nОкуляри, які носять не для того, щоб їх бачили — а щоб бачити інакше.\n\nІталійський ацетат Mazzucchelli, лінзи категорії 3 з повним захистом UV400. Форма з характером, нічого зайвого.\n\nЗнайомство з The Origin Collection починається з GENESIS — сміливою геометрією у трьох кольорах: чорний, синій, червоний.\n\nkindsigma.com",
       "hashtags": [
         "#kindsigma",
         "#kindsigmaua",
-        "#genesis",
         "#theorigincollection",
-        "#sunglasses"
+        "#genesis",
+        "#italianacetate",
+        "#mazzucchelli",
+        "#sunglasses",
+        "#eyewear"
       ],
       "slides": [
         {
