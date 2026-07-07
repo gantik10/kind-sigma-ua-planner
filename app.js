@@ -4,6 +4,7 @@
   const CUSTOM_KEY = 'ks-ua-custom-posts-v1';
   const ORDER_KEY = 'ks-ua-order-v1';
   const NOTES_KEY = 'ks-ua-notes-v1';
+  const CAPTION_KEY = 'ks-ua-captions-v1';
   const FORMATS = [
     { id: 'static',        label: 'Static' },
     { id: 'carousel',      label: 'Carousel' },
@@ -26,11 +27,28 @@
     customPosts: loadCustom(),
     order: loadOrder(),
     notes: loadNotes(),
+    captions: loadCaptions(),
+    editingCaption: null,
     dragId: null,
     justDragged: 0,
     pickerOpen: false,
     pickerCallback: null,
   };
+
+  /* ---- Editable captions (per post), persisted in LocalStorage ---- */
+  function loadCaptions() { try { return JSON.parse(localStorage.getItem(CAPTION_KEY) || '{}'); } catch { return {}; } }
+  function saveCaptions() { try { localStorage.setItem(CAPTION_KEY, JSON.stringify(state.captions)); } catch {} }
+  function getEffectiveCaption(p) {
+    if (isCustom(p)) return p.caption || '';
+    return (p.id in state.captions) ? state.captions[p.id] : (p.caption || '');
+  }
+  function hasCaptionOverride(p) { return !isCustom(p) && (p.id in state.captions); }
+  function setCaption(p, text) {
+    text = text == null ? '' : text;
+    if (isCustom(p)) { p.caption = text; saveCustom(); }
+    else { state.captions[p.id] = text; saveCaptions(); }
+  }
+  function resetCaption(p) { if (!isCustom(p)) { delete state.captions[p.id]; saveCaptions(); } }
 
   /* ---- Notes for Ahmed (per post), persisted in LocalStorage ---- */
   function loadNotes() { try { return JSON.parse(localStorage.getItem(NOTES_KEY) || '{}'); } catch { return {}; } }
@@ -516,7 +534,7 @@
     if (getNote(p.id)) meta.appendChild(badge('note', '✎ Ahmed'));
     info.appendChild(meta);
     info.appendChild(el('h3', '', p.title));
-    info.appendChild(el('div', 'caption-preview', (p.caption || '').replace(/\n/g, ' ')));
+    info.appendChild(el('div', 'caption-preview', (getEffectiveCaption(p) || '').replace(/\n/g, ' ')));
     r.appendChild(info);
     makeDraggable(r, p);
     return r;
@@ -616,18 +634,37 @@
       c.appendChild(pb);
     }
 
-    // Caption
-    if (p.caption) {
+    // Caption (editable)
+    {
       const cap = el('div', 'modal-section');
-      cap.appendChild(elInner('h4', '', p.format === 'stories-only' ? 'Stories plan' : 'Caption (UA)'));
-      cap.appendChild(el('div', 'body', p.caption));
-      if (p.format !== 'stories-only') {
+      cap.appendChild(elInner('h4', '', 'Caption (UA)'));
+      if (state.editingCaption === p.id) {
+        const ta = el('textarea', 'note-input caption-input');
+        ta.value = getEffectiveCaption(p);
+        ta.placeholder = 'Write the caption…';
+        cap.appendChild(ta);
         const btns = el('div', 'btn-row');
-        btns.appendChild(mkBtn('Copy caption + hashtags', () => copyText(p.caption + (p.hashtags?.length ? '\n\n' + p.hashtags.join(' ') : ''))));
-        btns.appendChild(mkBtn('Caption only', () => copyText(p.caption), true));
+        btns.appendChild(mkBtn('Save', () => { setCaption(p, ta.value); state.editingCaption = null; openModal(p); renderGrid(); toast('Caption saved'); }));
+        btns.appendChild(mkBtn('Cancel', () => { state.editingCaption = null; openModal(p); }, true));
+        if (hasCaptionOverride(p)) btns.appendChild(mkBtn('Reset to original', () => { resetCaption(p); state.editingCaption = null; openModal(p); renderGrid(); }, true));
         cap.appendChild(btns);
+        c.appendChild(cap);
+        setTimeout(() => { ta.focus(); }, 0);
+      } else {
+        const capText = getEffectiveCaption(p);
+        const body = el('div', 'body', capText || 'No caption yet');
+        if (!capText) body.classList.add('muted');
+        cap.appendChild(body);
+        if (hasCaptionOverride(p)) cap.appendChild(el('div', 'edited-note', 'Edited'));
+        const btns = el('div', 'btn-row');
+        btns.appendChild(mkBtn('Edit caption', () => { state.editingCaption = p.id; openModal(p); }));
+        if (capText) {
+          btns.appendChild(mkBtn('Copy caption + hashtags', () => copyText(capText + (p.hashtags?.length ? '\n\n' + p.hashtags.join(' ') : '')), true));
+          btns.appendChild(mkBtn('Caption only', () => copyText(capText), true));
+        }
+        cap.appendChild(btns);
+        c.appendChild(cap);
       }
-      c.appendChild(cap);
     }
 
     // Hashtags
@@ -769,6 +806,7 @@
     });
   }
   function closeModal() {
+    state.editingCaption = null;
     document.getElementById('modal').classList.remove('open');
   }
 
