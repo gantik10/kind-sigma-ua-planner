@@ -244,7 +244,7 @@
   state.images.main = await scanDir('images/');
   state.images.productShots = await scanDir('images/product-shots/');
 
-  const r = await fetch('posts.json?v=17');
+  const r = await fetch('posts.json?ts=' + Date.now(), { cache: 'no-store' });
   state.data = await r.json();
   for (const p of state.data.posts) {
     p.isVideo = !!(p.image && /\.(mp4|mov|webm)$/i.test(p.image));
@@ -929,7 +929,7 @@
     reader.readAsDataURL(file);
   }
   function parseHashtags(s) {
-    return (s || '').split(/[\s,]+/).filter(Boolean).map(t => (t[0] === '#' ? t : '#' + t));
+    return (s || '').split(/[\s,]+/).filter(Boolean).map(t => (t[0] === '#' ? t : '#' + t)).slice(0, 5);
   }
 
   function openEditor(existing) {
@@ -960,7 +960,7 @@
       const o = el('option', '', info.label); o.value = id; if (editing && existing.pillar === id) o.selected = true; pillarSel.appendChild(o);
     });
     const capIn = Object.assign(el('textarea', 'ed-input ed-textarea'), { value: editing ? (existing.caption || '') : '', placeholder: 'Caption text…' });
-    const hashIn = Object.assign(el('input', 'ed-input'), { value: editing && existing.hashtags ? existing.hashtags.join(' ') : '', placeholder: '#kindsigma #kindsigmaua' });
+    const hashIn = Object.assign(el('input', 'ed-input'), { value: editing && existing.hashtags ? existing.hashtags.join(' ') : '', placeholder: '#kindsigma #kindsigmaua (max 5)' });
 
     body.appendChild(field('Title', titleIn));
     const rowMeta = el('div', 'ed-row');
@@ -1014,6 +1014,7 @@
 
     body.appendChild(field('Caption', capIn));
     body.appendChild(field('Hashtags', hashIn));
+    body.appendChild(el('div', 'ed-hint', 'Maximum 5 hashtags.'));
 
     const actions = el('div', 'ed-actions');
     const save = mkBtn(editing ? 'Save changes' : 'Create post', () => {

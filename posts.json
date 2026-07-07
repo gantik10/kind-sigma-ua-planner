@@ -5,7 +5,7 @@
     "currency": "UAH",
     "basePrice": 5900,
     "generatedAt": "2026-07-06",
-    "version": "v10",
+    "version": "v11",
     "voice": "Minimal / editorial Ukrainian. Short, mood-first. Ends only with kindsigma.com.",
     "note": "23 posts from existing media. Interface in English; captions in Ukrainian. Drop = 3x3 warm grid; B&W stage merged into one carousel."
   },
@@ -68,10 +68,7 @@
         "#kindsigmaua",
         "#theorigincollection",
         "#genesis",
-        "#italianacetate",
-        "#mazzucchelli",
-        "#sunglasses",
-        "#eyewear"
+        "#italianacetate"
       ],
       "slides": [
         {
