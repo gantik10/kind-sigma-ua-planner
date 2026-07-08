@@ -37,7 +37,7 @@
 
   /* ---- Editable captions (per post), persisted in LocalStorage ---- */
   function loadCaptions() { try { return JSON.parse(localStorage.getItem(CAPTION_KEY) || '{}'); } catch { return {}; } }
-  function saveCaptions() { try { localStorage.setItem(CAPTION_KEY, JSON.stringify(state.captions)); } catch {} }
+  function saveCaptions() { try { localStorage.setItem(CAPTION_KEY, JSON.stringify(state.captions)); } catch {} schedulePush(); }
   function getEffectiveCaption(p) {
     if (isCustom(p)) return p.caption || '';
     return (p.id in state.captions) ? state.captions[p.id] : (p.caption || '');
@@ -52,7 +52,7 @@
 
   /* ---- Notes for Ahmed (per post), persisted in LocalStorage ---- */
   function loadNotes() { try { return JSON.parse(localStorage.getItem(NOTES_KEY) || '{}'); } catch { return {}; } }
-  function saveNotes() { try { localStorage.setItem(NOTES_KEY, JSON.stringify(state.notes)); } catch {} }
+  function saveNotes() { try { localStorage.setItem(NOTES_KEY, JSON.stringify(state.notes)); } catch {} schedulePush(); }
   function getNote(id) { return state.notes[id] || ''; }
   function setNote(id, txt) {
     txt = (txt || '').trim();
@@ -82,7 +82,7 @@
 
   function loadCustom() { try { return JSON.parse(localStorage.getItem(CUSTOM_KEY) || '[]'); } catch { return []; } }
   function saveCustom() {
-    try { localStorage.setItem(CUSTOM_KEY, JSON.stringify(state.customPosts)); return true; }
+    try { localStorage.setItem(CUSTOM_KEY, JSON.stringify(state.customPosts)); schedulePush(); return true; }
     catch (e) { alert('Could not save: browser storage is full. Try smaller/lighter images or delete a few of your own posts.'); return false; }
   }
   // All posts = plan posts (from posts.json) + user-created posts (from LocalStorage)
@@ -91,7 +91,7 @@
 
   /* ---- Custom ordering (drag to reorder), persisted in LocalStorage ---- */
   function loadOrder() { try { return JSON.parse(localStorage.getItem(ORDER_KEY) || 'null'); } catch { return null; } }
-  function saveOrder() { try { localStorage.setItem(ORDER_KEY, JSON.stringify(state.order)); } catch {} }
+  function saveOrder() { try { localStorage.setItem(ORDER_KEY, JSON.stringify(state.order)); } catch {} schedulePush(); }
   // Reconcile saved order with the current set of posts: keep saved sequence,
   // drop removed ids, append any new posts in their default (order-field) position.
   function ensureOrder() {
@@ -124,7 +124,7 @@
   }
 
   function loadStatuses() { try { return JSON.parse(localStorage.getItem(STATUS_KEY) || '{}'); } catch { return {}; } }
-  function saveStatuses() { localStorage.setItem(STATUS_KEY, JSON.stringify(state.statuses)); }
+  function saveStatuses() { localStorage.setItem(STATUS_KEY, JSON.stringify(state.statuses)); schedulePush(); }
   function getStatus(id) { return state.statuses[id] || 'draft'; }
   function setStatus(id, st) {
     if (st === 'draft') delete state.statuses[id]; else state.statuses[id] = st;
@@ -132,7 +132,7 @@
   }
 
   function loadOverrides() { try { return JSON.parse(localStorage.getItem(OVERRIDE_KEY) || '{}'); } catch { return {}; } }
-  function saveOverrides() { localStorage.setItem(OVERRIDE_KEY, JSON.stringify(state.overrides)); }
+  function saveOverrides() { localStorage.setItem(OVERRIDE_KEY, JSON.stringify(state.overrides)); schedulePush(); }
   // Override structure: { postId: { image: "filename", slides: ["f1", null, "f3"] } }
   function getEffectiveImage(post) {
     const ov = state.overrides[post.id];
@@ -260,6 +260,7 @@
   renderFilters();
   renderStats();
   renderAll();
+  startSync();
 
   function $(sel) { return document.querySelector(sel); }
   function el(tag, cls, txt) {
@@ -813,13 +814,80 @@
       if (!data || typeof data !== 'object') { alert('This file has no planner data.'); return; }
       if (!confirm('Import will replace the posts, edits, notes and order saved in THIS browser. Continue?')) return;
       Object.entries(data).forEach(([k, v]) => { if (ALL_KEYS.includes(k)) { try { localStorage.setItem(k, typeof v === 'string' ? v : JSON.stringify(v)); } catch {} } });
-      state.statuses = loadStatuses(); state.overrides = loadOverrides(); state.customPosts = loadCustom();
-      state.order = loadOrder(); state.notes = loadNotes(); state.captions = loadCaptions();
+      reloadStateFromStorage();
       state.activeTab = 'all';
       renderTabs(); renderFilters(); renderAll();
+      schedulePush();
       toast('Imported');
     };
     reader.readAsText(file);
+  }
+  function reloadStateFromStorage() {
+    state.statuses = loadStatuses(); state.overrides = loadOverrides(); state.customPosts = loadCustom();
+    state.order = loadOrder(); state.notes = loadNotes(); state.captions = loadCaptions();
+  }
+
+  /* ---- Live shared sync (optional): one shared JSON record all sessions read/write ---- */
+  // Set SYNC.bucket to a kvdb.io bucket id to turn this on. Empty = local-only (no behavior change).
+  const SYNC = { base: 'https://kvdb.io', bucket: '', key: 'planner-v1', token: '' };
+  function syncEnabled() { return !!SYNC.bucket; }
+  function syncUrl(extra) { return SYNC.base + '/' + SYNC.bucket + '/' + SYNC.key + '?t=' + Date.now() + (SYNC.token ? '&access_token=' + SYNC.token : '') + (extra || ''); }
+  const CLIENT_ID = (function () {
+    let id = localStorage.getItem('ks-client-id');
+    if (!id) { id = Math.random().toString(36).slice(2) + Date.now().toString(36); try { localStorage.setItem('ks-client-id', id); } catch {} }
+    return id;
+  })();
+  let lastRemoteStamp = 0, pushTimer = null;
+  function hasLocalOverlay() { return ALL_KEYS.some(k => localStorage.getItem(k) != null); }
+  function buildOverlay() { const o = {}; ALL_KEYS.forEach(k => { const v = localStorage.getItem(k); if (v != null) o[k] = v; }); return o; }
+  function applyOverlay(data) {
+    ALL_KEYS.forEach(k => { try { if (k in data) localStorage.setItem(k, data[k]); else localStorage.removeItem(k); } catch {} });
+    reloadStateFromStorage();
+  }
+  function isEditing() {
+    return !!state.editingCaption
+      || document.getElementById('editor')?.classList.contains('open');
+  }
+  function setSyncStatus(s) {
+    const elx = document.getElementById('syncStatus'); if (!elx) return;
+    elx.textContent = syncEnabled() ? ({ synced: '● Live sync on', saved: '● Saved', error: '● Sync error (working offline)' }[s] || '● Live sync on') : 'Saved on this device only';
+  }
+  function schedulePush() { if (!syncEnabled()) return; clearTimeout(pushTimer); pushTimer = setTimeout(pushRemote, 700); }
+  async function pushRemote() {
+    if (!syncEnabled()) return;
+    const payload = { _app: 'kindsigma', _updatedAt: Date.now(), _client: CLIENT_ID, data: buildOverlay() };
+    lastRemoteStamp = payload._updatedAt;
+    try {
+      const r = await fetch(syncUrl(), { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+      setSyncStatus(r.ok ? 'saved' : 'error');
+    } catch { setSyncStatus('error'); }
+  }
+  async function pullRemote(initial) {
+    if (!syncEnabled()) return;
+    try {
+      const r = await fetch(syncUrl());
+      if (r.status === 404) { if (initial && hasLocalOverlay()) await pushRemote(); else setSyncStatus('synced'); return; }
+      if (!r.ok) { setSyncStatus('error'); return; }
+      const j = await r.json();
+      const hasData = j && j.data && Object.keys(j.data).length;
+      if (!hasData) { if (initial && hasLocalOverlay()) await pushRemote(); else setSyncStatus('synced'); return; }
+      if (!initial) {
+        if (j._client === CLIENT_ID) return;
+        if (j._updatedAt && j._updatedAt <= lastRemoteStamp) return;
+        if (isEditing()) return; // don't interrupt someone typing
+      }
+      lastRemoteStamp = j._updatedAt || Date.now();
+      applyOverlay(j.data);
+      renderTabs(); renderFilters(); renderAll();
+      setSyncStatus('synced');
+    } catch { setSyncStatus('error'); }
+  }
+  function startSync() {
+    setSyncStatus('synced');
+    if (!syncEnabled()) { setSyncStatus('local'); return; }
+    pullRemote(true);
+    setInterval(() => pullRemote(false), 12000);
+    window.addEventListener('focus', () => pullRemote(false));
   }
 
   function bindModal() {
