@@ -387,11 +387,13 @@
     if (thumb) {
       const path = mediaPath(thumb);
       if (isVideoFile(thumb)) {
+        t.classList.add('has-video');
         const v = document.createElement('video');
         v.src = path; v.muted = true; v.loop = true; v.playsInline = true; v.preload = 'metadata';
         v.addEventListener('mouseenter', () => v.play().catch(() => {}));
         v.addEventListener('mouseleave', () => { v.pause(); v.currentTime = 0; });
         t.appendChild(v);
+        t.appendChild(el('div', 'play-ind', '▶'));
       } else {
         const img = document.createElement('img');
         img.src = path; img.alt = p.title; img.loading = 'lazy';
@@ -791,6 +793,35 @@
   }
   function copyText(t) { navigator.clipboard.writeText(t).then(() => toast('Copied')); }
 
+  /* ---- Export / Import all local work (to move between devices / share) ---- */
+  const ALL_KEYS = [STATUS_KEY, OVERRIDE_KEY, CUSTOM_KEY, ORDER_KEY, NOTES_KEY, CAPTION_KEY];
+  function exportData() {
+    const dump = { _app: 'kindsigma-planner', _version: 1, data: {} };
+    ALL_KEYS.forEach(k => { const v = localStorage.getItem(k); if (v != null) dump.data[k] = v; });
+    const blob = new Blob([JSON.stringify(dump, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = 'kindsigma-planner-data.json';
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+    toast('Exported');
+  }
+  function importData(file) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      let data;
+      try { const dump = JSON.parse(reader.result); data = dump && dump.data ? dump.data : dump; }
+      catch { alert('Could not read this file.'); return; }
+      if (!data || typeof data !== 'object') { alert('This file has no planner data.'); return; }
+      if (!confirm('Import will replace the posts, edits, notes and order saved in THIS browser. Continue?')) return;
+      Object.entries(data).forEach(([k, v]) => { if (ALL_KEYS.includes(k)) { try { localStorage.setItem(k, typeof v === 'string' ? v : JSON.stringify(v)); } catch {} } });
+      state.statuses = loadStatuses(); state.overrides = loadOverrides(); state.customPosts = loadCustom();
+      state.order = loadOrder(); state.notes = loadNotes(); state.captions = loadCaptions();
+      state.activeTab = 'all';
+      renderTabs(); renderFilters(); renderAll();
+      toast('Imported');
+    };
+    reader.readAsText(file);
+  }
+
   function bindModal() {
     $('#modalClose').onclick = (e) => { e.stopPropagation(); closeModal(); };
     document.querySelector('.modal-backdrop').onclick = closeModal;
@@ -826,6 +857,10 @@
       try { localStorage.removeItem(ORDER_KEY); } catch {}
       state.order = null; ensureOrder(); renderAll();
     };
+    const exportBtn = $('#exportBtn');
+    if (exportBtn) exportBtn.onclick = exportData;
+    const importInput = document.querySelector('#importBtn input');
+    if (importInput) importInput.onchange = () => { if (importInput.files[0]) importData(importInput.files[0]); importInput.value = ''; };
   }
 
   /* IMAGE PICKER */
