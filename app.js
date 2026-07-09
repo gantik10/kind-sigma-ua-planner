@@ -829,7 +829,7 @@
 
   /* ---- Live shared sync (optional): one shared JSON record all sessions read/write ---- */
   // Set SYNC.bucket to a kvdb.io bucket id to turn this on. Empty = local-only (no behavior change).
-  const SYNC = { base: 'https://kvdb.io', bucket: '', key: 'planner-v1', token: '' };
+  const SYNC = { base: 'https://kvdb.io', bucket: 'WgpW4D59sP3KUsFH4csaJi', key: 'planner-v1', token: '' };
   function syncEnabled() { return !!SYNC.bucket; }
   function syncUrl(extra) { return SYNC.base + '/' + SYNC.bucket + '/' + SYNC.key + '?t=' + Date.now() + (SYNC.token ? '&access_token=' + SYNC.token : '') + (extra || ''); }
   const CLIENT_ID = (function () {
@@ -850,7 +850,7 @@
   }
   function setSyncStatus(s) {
     const elx = document.getElementById('syncStatus'); if (!elx) return;
-    elx.textContent = syncEnabled() ? ({ synced: '● Live sync on', saved: '● Saved', error: '● Sync error (working offline)' }[s] || '● Live sync on') : 'Saved on this device only';
+    elx.textContent = syncEnabled() ? ({ synced: '● Live sync on', saved: '● Saved to everyone', error: '● Offline — retrying', unverified: '● Click the kvdb verification email to turn on sync' }[s] || '● Live sync on') : 'Saved on this device only';
   }
   function schedulePush() { if (!syncEnabled()) return; clearTimeout(pushTimer); pushTimer = setTimeout(pushRemote, 700); }
   async function pushRemote() {
@@ -859,13 +859,14 @@
     lastRemoteStamp = payload._updatedAt;
     try {
       const r = await fetch(syncUrl(), { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-      setSyncStatus(r.ok ? 'saved' : 'error');
+      setSyncStatus(r.ok ? 'saved' : (r.status === 403 ? 'unverified' : 'error'));
     } catch { setSyncStatus('error'); }
   }
   async function pullRemote(initial) {
     if (!syncEnabled()) return;
     try {
       const r = await fetch(syncUrl());
+      if (r.status === 403) { setSyncStatus('unverified'); return; }
       if (r.status === 404) { if (initial && hasLocalOverlay()) await pushRemote(); else setSyncStatus('synced'); return; }
       if (!r.ok) { setSyncStatus('error'); return; }
       const j = await r.json();
